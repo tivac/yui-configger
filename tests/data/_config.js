@@ -40,31 +40,31 @@ var test_config = {
                 ],
                 
                 "item-templates" : [
-                    "gw2-template-item",
-                    "gw2-template-item-header",
-                    "gw2-template-item-buttons"
+                    "test-template-item",
+                    "test-template-item-header",
+                    "test-template-item-buttons"
                 ]
             },
             
             modules : "configger"
         },
         
-        "gemstore-templates" : {
+        "test-templates" : {
             /* live
             combine   : true,
             comboBase : "/combo/_",
-            root      : "/handlebars/GW2/",
+            root      : "/handlebars/test/",
             //live */
             
             //* dev
             // templates like this must ALWAYS go through combo handler, they aren't normal files
-            base : "/combo/_/handlebars/GW2/",
+            base : "/combo/_/handlebars/test/",
             //dev */
             
             patterns : {
-                "gw2-template" : {
+                "test-template" : {
                     configFn : function(me) {
-                        me.path = me.name.replace("gw2-template-", "") + ".handlebars";
+                        me.path = me.name.replace("test-template-", "") + ".handlebars";
                         me.requires = [
                             "handlebars-base",
                             "helper-i18n"
@@ -74,7 +74,7 @@ var test_config = {
             }
         },
         
-        "gemstore-translations" : {
+        "test-translations" : {
             /* live
             combine   : true,
             comboBase : "/combo/_",
@@ -87,7 +87,7 @@ var test_config = {
             //dev */
             
             patterns : {
-                "gw2-i18n" : {
+                "test-i18n" : {
                     configFn : function(me) {
                         var lang = test_config.pageLang;
                         if(!lang) {
@@ -95,7 +95,7 @@ var test_config = {
                         }
                         
                         me.path =
-                            (me.name.replace("gw2-i18n-", "GW2/" + lang + "/")
+                            (me.name.replace("test-i18n-", "GW2/" + lang + "/")
                                     .split("-")
                                     .join("/")) +
                             ".i18n";
