@@ -3,6 +3,7 @@
     "version" : "0.0.1",
     "description" : "Extract meta-data from a folder of YUI modules & generate a Loader config",
     "preferGlobal" : true,
+    "bin": "./bin/yui-configger",
     "bugs" : "https://github.com/tivac/yui-configger/issues",
     "main" : "./lib/configger.js",
     "repository": {
