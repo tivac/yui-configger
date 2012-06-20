@@ -18,3 +18,5 @@ To install from a clone of the source:
     git clone git://github.com/tivac/yui-configger.git
     cd yui-configger
     npm link
+
+On Windows, replace `npm link` with `npm -g install .`
