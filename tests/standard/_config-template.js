@@ -9,7 +9,7 @@ var test_config = {
             //live */
 
             //* dev
-            //base : "/js/",
+            base : "/js/",
             //dev */
 
             modules : "configger"
