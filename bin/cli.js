@@ -3,17 +3,26 @@
 
 "use strict";
 
-var argv = require("optimist")
-        .usage("Generate a YUI config.\nUsage: $0 -r [dir] -f [filter] -t [file] -o [file]")
-        .options(require("./args.json"))
-        .argv,
+var fs   = require("fs"),
+    path = require("path"),
+    argv = require("optimist")
+            .usage("Generate a YUI config.\nUsage: $0 -r [dir] -f [filter] -t [file] -o [file]")
+            .options(require("./args.json"))
+            .argv,
 
     Configger = require("../lib/configger.js"),
     configger = new Configger(argv),
-    output    = configger.run();
+    output    = configger.run(),
+    save;
+
+save = function(output) {
+    var file = path.resolve(argv.output);
+
+    fs.writeFileSync(file, output);
+};
 
 if(argv.output) {
-    console.log('TODO: Write generated output to ' + argv.output);
+    save(output);
 } else {
-    console.log(output); //TODO: REMOVE DEBUGGING
+    console.log(output);
 }
