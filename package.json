@@ -20,5 +20,9 @@
     "license": "MIT",
     "engine": {
         "node": ">=0.6"
-    }
+    },
+    "keywords": [
+        "yui",
+        "config"
+    ],
 }
