@@ -24,6 +24,10 @@ var test_config = {
             },*/
 
             modules : "configger"
+        },
+
+        "subfolder-b" : {
+            modules : "configger"
         }
     }
 };
