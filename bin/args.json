@@ -22,5 +22,10 @@
         "alias"       : "k",
         "description" : "Key in config to replace with module metadata",
         "default"     : "configger"
+    },
+    "comments" : {
+        "alias"       : "c",
+        "description" : "Keep comments from template in generated file",
+        "default"     : 1
     }
 }
