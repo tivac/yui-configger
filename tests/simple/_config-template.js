@@ -2,7 +2,9 @@
 var test_config = {
     groups : {
         root : {
-            /* comment one */
+            /* 
+                comment one 
+            */
             modules : "configger"
         },
 
