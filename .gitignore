@@ -21,3 +21,10 @@ Desktop.ini
 
 # Mac crap
 .DS_Store
+
+############
+## My Stuff
+############
+
+# Testing file output
+test-config.js
