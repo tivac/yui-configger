@@ -25,12 +25,10 @@
     },
     "comments" : {
         "alias"       : "c",
-        "description" : "Keep comments from template in generated file",
-        "default"     : "true"
+        "description" : "Keep comments from template in generated file"
     },
     "quiet" : {
         "alias"       : "q",
-        "description" : "Minimal output",
-        "default"     : "false"
+        "description" : "Minimal output"
     }
 }
