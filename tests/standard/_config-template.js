@@ -15,6 +15,20 @@ var test_config = {
             modules : "configger"
         },
 
+        "test-root" : {
+            /* live
+            combine   : true,
+            comboBase : "/combo/_",
+            root      : "/js/",
+            //live */
+
+            //* dev
+            base : "/js/",
+            //dev */
+
+            modules : "configger"
+        },
+
         subfolder : {
             /*aliases : {
                 "home" : [
@@ -28,6 +42,10 @@ var test_config = {
 
         "subfolder-b" : {
             "modules" : "configger"
+        },
+
+        "test-subfolder" : {
+            modules : "configger"
         }
     }
 };

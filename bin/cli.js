@@ -6,7 +6,7 @@
 var fs   = require("fs"),
     path = require("path"),
     argv = require("optimist")
-            .usage("Generate a YUI config.\nUsage: $0 -r [dir] -f [filter] -t [file] -o [file]")
+            .usage("Generate a YUI config.\nUsage: $0 -r [dir]")
             .options(require("./args.json"))
             .argv,
 

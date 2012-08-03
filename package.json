@@ -1,6 +1,6 @@
 {
     "name" : "yui-configger",
-    "version" : "0.1.4",
+    "version" : "0.1.5",
     "description" : "Extract meta-data from a folder of YUI modules & generate a Loader config",
     "preferGlobal" : true,
     "author" : "Pat Cavit <pcavit@gmail.com",
@@ -20,7 +20,7 @@
     },
     "license": "MIT",
     "engine": {
-        "node": ">=0.6"
+        "node": ">=0.8"
     },
     "keywords": [
         "yui",
