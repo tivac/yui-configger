@@ -1,16 +1,18 @@
 {
-    "name" : "yui-configger",
-    "version" : "0.1.7",
-    "description" : "Extract meta-data from a folder of YUI modules & generate a Loader config",
+    "name"         : "yui-configger",
+    "version"      : "0.1.7",
+    "description"  : "Extract meta-data from a folder of YUI modules & generate a Loader config",
     "preferGlobal" : true,
-    "author" : "Pat Cavit <pcavit@gmail.com",
-    "bugs" : "https://github.com/tivac/yui-configger/issues",
-    "bin": "./bin/cli.js",
-    "main" : "./lib/configger.js",
+    "author"       : "Pat Cavit <pcavit@gmail.com",
+    "bugs"         : "https://github.com/tivac/yui-configger/issues",
+    "bin"          : "./bin/cli.js",
+    "main"         : "./lib/configger.js",
+    
     "repository": {
         "type": "git",
         "url": "https://github.com/tivac/yui-configger.git"
     },
+    
     "dependencies" : {
         "esprima"   : "1.0.x",
         "escodegen" : "0.0.x",
@@ -18,12 +20,25 @@
         "optimist"  : "0.3.x",
         "traverse"  : "0.6.x"
     },
+    
+    "devDependencies" : {
+        "mocha"    : "1.9.x",
+        "istanbul" : "0.1.x"
+    },
+    
+    "scripts" : {
+        "test" : "istanbul test ./node_modules/mocha/bin/_mocha"
+    },
+    
     "license": "MIT",
+    
     "engine": {
         "node": ">=0.8"
     },
+    
     "keywords": [
         "yui",
-        "config"
+        "config",
+        "esprima"
     ]
 }

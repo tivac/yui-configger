@@ -2,7 +2,7 @@
 
 "use strict";
 
-var Configger = require("../lib/configger.js"),
+/*var Configger = require("../lib/configger.js"),
     configger;
     
 configger = new Configger({
@@ -10,3 +10,4 @@ configger = new Configger({
 });
 
 console.log(configger.run());
+*/
