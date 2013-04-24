@@ -35,8 +35,6 @@ describe("YUI Configger", function() {
             
             g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
             
-            console.log(JSON.stringify(g.ast, null, 4));
-            
             // This gets... fun
             // group name
             assert.equal(g.ast.key.value, g.name);
@@ -55,11 +53,11 @@ describe("YUI Configger", function() {
         });
         
         it("should generate an AST from a template", function() {
-            var g;
+            var g, ast;
             
             g = new Group({
                 name     : "test",
-                dir      : "/test/specimens/simple/",
+                dir      : "./test/specimens/simple/",
                 template : {
                     type : "Property",
                     key : {
@@ -90,8 +88,10 @@ describe("YUI Configger", function() {
             
             g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
             
+            ast = g.ast;
+            
             // group name
-            assert.equal(g.ast.key.name, g.name);
+            assert.equal(g.ast.key.value, g.name);
             // group base
             assert.equal(g.ast.value.properties[0].value.value, g.dir);
             // modules object
@@ -108,8 +108,6 @@ describe("YUI Configger", function() {
             assert.equal(g.ast.value.properties[1].value.properties[0].value.properties[1].value.elements[0].value, "b");
         });
 
-        it("should update existing ast objects", function() {
-            assert.fail("Not Implemented");
-        });
+        it("should update existing ast objects");
     });
 });
