@@ -3,8 +3,7 @@
 
 "use strict";
 
-var path   = require("path"),
-    assert = require("assert"),
+var assert = require("assert"),
     Module = require("../lib/module.js");
 
 describe("YUI Configger", function() {
@@ -14,7 +13,7 @@ describe("YUI Configger", function() {
         });
         
         it("should read a file", function() {
-            var m = new Module({ file : "./test/specimens/simple/a.js", root : "./test/specimens/simple/" });
+            var m = new Module({ file : "./test/specimens/simple/a.js" });
             
             m._read();
             
@@ -22,7 +21,7 @@ describe("YUI Configger", function() {
         });
         
         it("should parse files", function() {
-            var m = new Module({ file : "./test/specimens/simple/a.js", root : "./test/specimens/simple/" }),
+            var m = new Module({ file : "./test/specimens/simple/a.js" }),
                 result;
             
             result = m.load();
@@ -30,6 +29,7 @@ describe("YUI Configger", function() {
             assert.equal(result, true);
             assert.equal(m.name, "module-a");
             assert.equal(m.group, "/test/specimens/simple/");
+            assert(Object.keys(m.config));
         });
     });
 });
