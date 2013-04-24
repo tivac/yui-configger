@@ -4,33 +4,39 @@
         "alias"       : "r",
         "description" : "Root directory to read YUI modules from"
     },
+    
     "comments" : {
         "alias"       : "c",
         "description" : "Keep comments from template in generated file"
     },
+    
     "quiet" : {
         "alias"       : "q",
         "description" : "Minimal output"
     },
+    
     "output" : {
         "alias"       : "o",
         "description" : "Output file for generated config (defaults to stdout)"
     },
+    
     "tmpl" : {
         "alias"       : "t",
         "description" : "YUI config file to use as template",
         "default"     : "_config-template.js"
     },
+    
     "filter" : {
         "alias"       : "f",
         "description" : "File-name filter (regex)",
         "default"     : "."
     },
-    "key" : {
-        "alias"       : "k",
-        "description" : "Key in config to replace with module metadata",
-        "default"     : "configger"
+    
+    "extension" : {
+        "description" : "File extension filter (regex)",
+        "default"     : "js"
     },
+    
     "prefix" : {
         "alias"       : "p",
         "description" : "Prefix for group names",
