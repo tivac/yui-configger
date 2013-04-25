@@ -15,42 +15,13 @@ describe("YUI Configger", function() {
             assert.equal(g.name, "test");
         });
         
-        it("should strip a leading \".\" from the dir value", function() {
+        it("should use the prefix for the name", function() {
             var g = new Group({
                     name : "test",
-                    dir  : "./test/specimens/simple/"
+                    prefix : "a"
                 });
             
-            assert.equal(g.dir, "/test/specimens/simple/");
-        });
-        
-        it("should add a leading \"/\" to the dir value", function() {
-            var g = new Group({
-                    name : "test",
-                    dir  : "test/specimens/simple/"
-                });
-            
-            assert.equal(g.dir, "/test/specimens/simple/");
-        });
-        
-        it("should add a trailing \"/\" to the dir value", function() {
-            var g = new Group({
-                    name : "test",
-                    dir  : "/test/specimens/simple"
-                });
-            
-            assert.equal(g.dir, "/test/specimens/simple/");
-        });
-        
-        it("should convert all path separators to \"/\"", function() {
-            var g;
-            
-            g = new Group({
-                name : "test",
-                dir  : "test\\specimens\\simple\\"
-            });
-            
-            assert.equal(g.dir, "/test/specimens/simple/");
+            assert.equal(g.name, "atest");
         });
         
         it("should start out with no modules", function() {
@@ -66,6 +37,12 @@ describe("YUI Configger", function() {
             
             assert.equal(g.modules.length, 1);
             assert.equal(g.modules[0], "module");
+        });
+        
+        it("should bail if there are no modules", function() {
+            var g = new Group({ name : "test" });
+            
+            assert.equal(g.ast, undefined);
         });
         
         it("should generate a brand-new AST", function() {
