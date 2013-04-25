@@ -7,7 +7,7 @@ var assert = require("assert"),
     Module = require("../lib/module.js");
 
 describe("YUI Configger", function() {
-    describe("Module Class", function() {
+    describe("Module", function() {
         it("should instantiate", function() {
             new Module();
         });
@@ -31,5 +31,7 @@ describe("YUI Configger", function() {
             assert.equal(m.group, "/test/specimens/simple/");
             assert(Object.keys(m.config));
         });
+        
+        it("should generate a valid partial AST");
     });
 });

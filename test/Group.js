@@ -8,7 +8,7 @@ var assert = require("assert"),
     Module = require("../lib/module.js");
 
 describe("YUI Configger", function() {
-    describe("Group Class", function() {
+    describe("Group", function() {
         it("should store its name", function() {
             var g = new Group({ name : "test" });
             
