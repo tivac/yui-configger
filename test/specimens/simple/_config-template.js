@@ -1,7 +1,7 @@
-/*global YUI:true */
+/*jshint yui:true */
 var test_config = {
     groups : {
-        root : {
+        "/" : {
             /*
                 comment one
             */
@@ -9,7 +9,7 @@ var test_config = {
             modules : "configger"
         },
 
-        subfolder : {
+        "/subfolder/" : {
             /* comment two */
             base    : "configger",
             modules : "configger"

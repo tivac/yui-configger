@@ -46,25 +46,28 @@ describe("YUI Configger", function() {
         });
         
         it("should generate a brand-new AST", function() {
-            var g = new Group({ name : "test" });
+            var g = new Group({ name : "test" }),
+                ast;
             
             g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
             
+            ast = g.ast;
+            
             // This gets... fun
             // group name
-            assert.equal(g.ast.key.value, g.name);
+            assert.equal(ast.key.value, g.name);
             // modules object
-            assert.equal(g.ast.value.properties[0].key.name, "modules");
+            assert.equal(ast.value.properties[0].key.name, "modules");
             // module-a definition
-            assert.equal(g.ast.value.properties[0].value.properties[0].key.value, "module-a");
+            assert.equal(ast.value.properties[0].value.properties[0].key.value, "module-a");
             // module-a path key
-            assert.equal(g.ast.value.properties[0].value.properties[0].value.properties[0].key.name, "path");
+            assert.equal(ast.value.properties[0].value.properties[0].value.properties[0].key.name, "path");
             // module-a path value
-            assert.equal(g.ast.value.properties[0].value.properties[0].value.properties[0].value.value, "a.js");
+            assert.equal(ast.value.properties[0].value.properties[0].value.properties[0].value.value, "a.js");
             // module-a requires key
-            assert.equal(g.ast.value.properties[0].value.properties[0].value.properties[1].key.name, "requires");
+            assert.equal(ast.value.properties[0].value.properties[0].value.properties[1].key.name, "requires");
             // module-a requires value
-            assert.equal(g.ast.value.properties[0].value.properties[0].value.properties[1].value.elements[0].value, "b");
+            assert.equal(ast.value.properties[0].value.properties[0].value.properties[1].value.elements[0].value, "b");
         });
         
         it("should generate an AST from a template", function() {
@@ -106,23 +109,104 @@ describe("YUI Configger", function() {
             ast = g.ast;
             
             // group name
-            assert.equal(g.ast.key.value, g.name);
+            assert.equal(ast.key.value, g.name);
             // group base
-            assert.equal(g.ast.value.properties[0].value.value, g.dir);
+            assert.equal(ast.value.properties[0].value.value, g.dir);
             // modules object
-            assert.equal(g.ast.value.properties[1].key.name, "modules");
+            assert.equal(ast.value.properties[1].key.name, "modules");
             // module-a definition
-            assert.equal(g.ast.value.properties[1].value.properties[0].key.value, "module-a");
+            assert.equal(ast.value.properties[1].value.properties[0].key.value, "module-a");
             // module-a path key
-            assert.equal(g.ast.value.properties[1].value.properties[0].value.properties[0].key.name, "path");
+            assert.equal(ast.value.properties[1].value.properties[0].value.properties[0].key.name, "path");
             // module-a path value
-            assert.equal(g.ast.value.properties[1].value.properties[0].value.properties[0].value.value, "a.js");
+            assert.equal(ast.value.properties[1].value.properties[0].value.properties[0].value.value, "a.js");
             // module-a requires key
-            assert.equal(g.ast.value.properties[1].value.properties[0].value.properties[1].key.name, "requires");
+            assert.equal(ast.value.properties[1].value.properties[0].value.properties[1].key.name, "requires");
             // module-a requires value
-            assert.equal(g.ast.value.properties[1].value.properties[0].value.properties[1].value.elements[0].value, "b");
+            assert.equal(ast.value.properties[1].value.properties[0].value.properties[1].value.elements[0].value, "b");
         });
         
-        it("should update existing ast objects");
+        it("should update existing ast objects", function() {
+            var g, ast;
+            
+            g = new Group({
+                name     : "fooga",
+                dir      : "/specimens/simple/",
+                existing : {
+                    type : "Property",
+                    key : {
+                        type : "Literal",
+                        value : "fooga"
+                    },
+                    value : {
+                        type : "ObjectExpression",
+                        properties : [
+                            {
+                                type : "Property",
+                                key : {
+                                    type : "Identifier",
+                                    name : "base"
+                                },
+                                value : {
+                                    type : "Literal",
+                                    value : "configger"
+                                },
+                                kind : "init"
+                            }, {
+                                type : "Property",
+                                key : {
+                                    type : "Identifier",
+                                    name : "modules"
+                                },
+                                value : {
+                                    type : "Literal",
+                                    value : "configger"
+                                },
+                                kind : "init"
+                            }, {
+                                type : "Property",
+                                key : {
+                                    type : "Identifier",
+                                    name : "fooga"
+                                },
+                                value : {
+                                    type : "Literal",
+                                    value : "wooga"
+                                },
+                                kind : "init"
+                            }
+                        ]
+                    },
+                    kind : "init"
+                },
+            });
+            
+            g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
+            
+            ast = g.ast;
+            
+            // group name
+            assert.equal(ast.key.value, "fooga");
+            // group base
+            assert.equal(ast.value.properties[0].value.value, g.dir);
+            // modules object
+            assert.equal(ast.value.properties[1].key.name, "modules");
+            // module-a definition
+            assert.equal(ast.value.properties[1].value.properties[0].key.value, "module-a");
+            // module-a path key
+            assert.equal(ast.value.properties[1].value.properties[0].value.properties[0].key.name, "path");
+            // module-a path value
+            assert.equal(ast.value.properties[1].value.properties[0].value.properties[0].value.value, "a.js");
+            // module-a requires key
+            assert.equal(ast.value.properties[1].value.properties[0].value.properties[1].key.name, "requires");
+            // module-a requires value
+            assert.equal(ast.value.properties[1].value.properties[0].value.properties[1].value.elements[0].value, "b");
+            // fooga property
+            assert.equal(ast.value.properties[2].key.name, "fooga");
+            // fooga property value
+            assert.equal(ast.value.properties[2].value.value, "wooga");
+        });
+
+        
     });
 });
