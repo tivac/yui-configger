@@ -4,12 +4,10 @@
 "use strict";
 
 var assert    = require("assert"),
-    Configger = require("../lib/index.js"),
-    Group     = require("../lib/group.js"),
-    Module    = require("../lib/module.js");
+    Configger = require("../lib/index.js");
 
 describe("YUI Configger", function() {
-    describe.skip("Configger Class", function() {
+    describe("Configger Class", function() {
         it("should load defaults from args.json", function() {
             var c = new Configger({ root : "./test/specimens/simple/" });
             
@@ -22,30 +20,59 @@ describe("YUI Configger", function() {
         
         it("should find modules on the file system", function() {
             var c = new Configger({ root : "./test/specimens/simple/" }),
-                files = c._files();
+                modules = c._modules();
             
-            assert(files.length);
+            assert(modules.length);
+        });
+        
+        it("should create groups from directories on the file system", function() {
+            var c = new Configger({ root : "./test/specimens/simple/" }),
+                groups = c._groups();
+                
+            assert(groups);
+            assert(Object.keys(groups).length);
+            assert(groups["/subfolder/"]);
         });
         
         it("should find a config template on the file system", function() {
             var c = new Configger({ root : "./test/specimens/simple/" }),
-                template = c._template();
-                
-            assert(template.length);
+                ast = c._config();
+            
+            assert(ast);
+            assert.equal(ast.type, "Program");
         });
         
-        it("should return a config string from run (simple)", function() {
+        it("should parse a group template out of the config template", function() {
+            var c = new Configger({ root : "./test/specimens/group-template/" }),
+                config = c._config(),
+                template;
+                
+            assert(config);
+            
+            template = c._template(config);
+            
+            assert(template);
+            assert(template.key);
+            assert.equal(template.key.name, "$group");
+        });
+        
+        // Skipped until we support not using a group template in some form
+        it.skip("should return a config string from run (simple)", function() {
             var c = new Configger({ root : "./test/specimens/simple/" }),
                 result = c.run();
             
-            //console.log("result:", result);
+            console.log("result:", result);
         });
         
-        it("should return a config string from run (group-template)", function() {
+        it.only("should return a config string from run (group-template)", function() {
             var c = new Configger({ root : "./test/specimens/group-template/" }),
                 result = c.run();
             
-            //console.log("result:", result);
+            // TODO: better assertions (try to re-parse into AST & verify against that?)
+            assert(result.indexOf("var test_config") > -1);
+            assert(result.indexOf("module-b") > -1);
+            assert(result.indexOf("/subfolder/sub-subfolder/") > -1);
+            assert(result.indexOf("module-c") > -1);
         });
     });
 });
