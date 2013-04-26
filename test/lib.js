@@ -4,31 +4,39 @@
 "use strict";
 
 var assert = require("assert"),
-    lib    = require("../lib/lib.js");
+    fixup  = require("../lib/lib.js").pathFixup;
     
 describe("YUI Configger", function() {
     describe("lib", function() {
         it("should provide a `pathFixup` function", function() {
-            assert(lib.pathFixup);
-            assert.equal(typeof lib.pathFixup, "function");
+            assert(fixup);
+            assert.equal(typeof fixup, "function");
+        });
+        
+        it("should return falsey/non-string values unchanged", function() {
+            var o = { fooga : true };
+            
+            assert.equal(fixup(false), false);
+            assert.equal(fixup(undefined), undefined);
+            assert.equal(fixup(o), o);
         });
         
         it("should remove leading '.'s from paths", function() {
-            assert(lib.pathFixup("./"), "/");
+            assert(fixup("./"), "/");
         });
         
         it("should normalize separators to '/'", function() {
-            assert.equal(lib.pathFixup("\\a\\b"), "/a/b/");
+            assert.equal(fixup("\\a\\b"), "/a/b/");
         });
         
         it("should add a leading '/' if necessary", function() {
-            assert.equal(lib.pathFixup("a/b"), "/a/b/");
-            assert.notEqual(lib.pathFixup("/a/b"), "//a/b/");
+            assert.equal(fixup("a/b"), "/a/b/");
+            assert.notEqual(fixup("/a/b"), "//a/b/");
         });
         
         it("should add a trailing '/' if necessary", function() {
-            assert.equal(lib.pathFixup("a/b"), "/a/b/");
-            assert.notEqual(lib.pathFixup("a/b/"), "/a/b//");
+            assert.equal(fixup("a/b"), "/a/b/");
+            assert.notEqual(fixup("a/b/"), "/a/b//");
         });
     });
 });
