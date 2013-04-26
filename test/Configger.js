@@ -64,7 +64,7 @@ describe("YUI Configger", function() {
             console.log("result:", result);
         });
         
-        it.only("should return a config string from run (group-template)", function() {
+        it("should return a config string from run (group-template)", function() {
             var c = new Configger({ root : "./test/specimens/group-template/" }),
                 result = c.run();
             
