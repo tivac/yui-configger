@@ -38,6 +38,14 @@ describe("YUI Configger", function() {
             assert.equal(m._parse(), undefined);
         });
         
+        it("should load a file if `file` is set after instantiation", function() {
+            var m = new Module();
+            
+            m.file = "./test/specimens/simple/a.js";
+            
+            assert.equal(m.name, "module-a");
+        });
+        
         it("should not attempt to parse invalid YUI modules", function() {
             var m = new Module({ file : "./test/specimens/simple/_config-template.js" });
             
