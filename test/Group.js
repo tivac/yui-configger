@@ -45,6 +45,17 @@ describe("YUI Configger", function() {
             assert.equal(g.ast, undefined);
         });
         
+        it("shouldn't include modules w/o files", function() {
+            var g = new Group(),
+                modules;
+            
+            g.modules.push(new Module());
+            
+            modules = g._modulesAST();
+            
+            assert.equal(modules.value.properties.length, 0);
+        });
+        
         it("should generate a brand-new AST", function() {
             var g = new Group({ name : "test" }),
                 ast;
@@ -126,7 +137,7 @@ describe("YUI Configger", function() {
             assert.equal(ast.value.properties[1].value.properties[0].value.properties[1].value.elements[0].value, "b");
         });
         
-        it("should update existing ast objects", function() {
+        it("should update existing ast objects (Identifier modules property)", function() {
             var g, ast;
             
             g = new Group({
@@ -207,6 +218,124 @@ describe("YUI Configger", function() {
             assert.equal(ast.value.properties[2].value.value, "wooga");
         });
 
-        
+        it("should update existing ast objects (Literal \"modules\" property)", function() {
+            var g, ast;
+            
+            g = new Group({
+                name     : "fooga",
+                dir      : "/specimens/simple/",
+                existing : {
+                    type : "Property",
+                    key : {
+                        type : "Literal",
+                        value : "fooga"
+                    },
+                    value : {
+                        type : "ObjectExpression",
+                        properties : [
+                            {
+                                type : "Property",
+                                key : {
+                                    type : "Identifier",
+                                    name : "base"
+                                },
+                                value : {
+                                    type : "Literal",
+                                    value : "configger"
+                                },
+                                kind : "init"
+                            }, {
+                                type : "Property",
+                                key : {
+                                    type : "Literal",
+                                    value : "modules",
+                                    raw   : "\"modules\""
+                                },
+                                value : {
+                                    type : "Literal",
+                                    value : "configger"
+                                },
+                                kind : "init"
+                            }, {
+                                type : "Property",
+                                key : {
+                                    type : "Identifier",
+                                    name : "fooga"
+                                },
+                                value : {
+                                    type : "Literal",
+                                    value : "wooga"
+                                },
+                                kind : "init"
+                            }
+                        ]
+                    },
+                    kind : "init"
+                },
+            });
+            
+            g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
+            
+            ast = g.ast;
+            
+            // group name
+            assert.equal(ast.key.value, "fooga");
+            // group base
+            assert.equal(ast.value.properties[0].value.value, g.dir);
+        });
+
+        it("should only update base/root values that contain \"{dir}\"", function() {
+            var g, ast;
+            
+            g = new Group({
+                name     : "test",
+                dir      : "./test/specimens/simple/",
+                template : {
+                    type : "Property",
+                    key : {
+                        type : "Identifier",
+                        name : "$group"
+                    },
+                    value : {
+                        type : "ObjectExpression",
+                        properties : [
+                            {
+                                type : "Property",
+                                key : {
+                                    type : "Identifier",
+                                    name : "base"
+                                },
+                                value : {
+                                    type  : "Literal",
+                                    value : "{dir}",
+                                    raw   : "\"{dir}\""
+                                },
+                                kind : "init"
+                            }, {
+                                 type : "Property",
+                                key : {
+                                    type : "Identifier",
+                                    name : "base"
+                                },
+                                value : {
+                                    type  : "Literal",
+                                    value : "{dir",
+                                    raw   : "\"{dir\""
+                                },
+                                kind : "init"
+                            }
+                        ]
+                    },
+                    kind : "init"
+                }
+            });
+            
+            g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
+            
+            ast = g.ast;
+            
+            assert.equal(ast.value.properties[1].value.value, "{dir");
+            assert.equal(ast.value.properties[1].value.raw, "\"{dir\"");
+        });
     });
 });
