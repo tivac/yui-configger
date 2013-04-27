@@ -42,6 +42,13 @@ describe("YUI Configger", function() {
             assert.equal(ast.type, "Program");
         });
         
+        it("should handle not finding a config template on the file system", function() {
+            var c = new Configger({ root : "./test/specimens/empty/" }),
+                ast = c._config();
+                
+            assert.equal(ast, undefined);
+        });
+        
         it("should parse a group template out of the config template", function() {
             var c = new Configger({ root : "./test/specimens/group-template/" }),
                 config = c._config(),
@@ -56,16 +63,20 @@ describe("YUI Configger", function() {
             assert.equal(template.key.name, "$group");
         });
         
-        // Skipped until we support not using a group template in some form
-        it.skip("should return a config string from run (simple)", function() {
-            var c = new Configger({ root : "./test/specimens/simple/" }),
+        it("should return a config string from run (simple)", function() {
+            var c = new Configger({ root : "./test/specimens/simple/", quiet : true }),
                 result = c.run();
             
-            console.log("result:", result);
+            // TODO: better assertions (try to re-parse into AST & verify against that?)
+            assert(result.indexOf("var test_config") > -1);
+            assert(result.indexOf("module-b") > -1);
+            assert(result.indexOf("/subfolder/") > -1);
+            
+            assert.fail("Single /subfolder/ group", "Two /subfolder/ groups");
         });
         
         it("should return a config string from run (group-template)", function() {
-            var c = new Configger({ root : "./test/specimens/group-template/" }),
+            var c = new Configger({ root : "./test/specimens/group-template/", quiet : true }),
                 result = c.run();
             
             // TODO: better assertions (try to re-parse into AST & verify against that?)
@@ -73,6 +84,13 @@ describe("YUI Configger", function() {
             assert(result.indexOf("module-b") > -1);
             assert(result.indexOf("/subfolder/sub-subfolder/") > -1);
             assert(result.indexOf("module-c") > -1);
+        });
+        
+        it("should bail if no ast can be generated", function() {
+            var c = new Configger({ root : "./test/specimens/empty/", quiet : true }),
+                result = c.run();
+                
+            assert.equal(result, undefined);
         });
     });
 });
