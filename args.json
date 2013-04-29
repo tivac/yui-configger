@@ -34,7 +34,7 @@
     
     "extension" : {
         "description" : "File extension filter (regex)",
-        "default"     : "js"
+        "default"     : "^\\.js$"
     },
     
     "prefix" : {

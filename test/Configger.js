@@ -4,6 +4,7 @@
 "use strict";
 
 var fs        = require("fs"),
+    path      = require("path"),
     assert    = require("assert"),
     Configger = require("../lib/index.js");
 
@@ -15,28 +16,50 @@ describe("YUI Configger", function() {
             assert.equal(c.options.root, "./test/specimens/simple/");
             assert.equal(c.options.tmpl, "_config-template.js");
             assert.equal(c.options.filter.toString(), "/./");
-            assert.equal(c.options.extension.toString(), "/js/");
+            assert.equal(c.options.extension.toString(), "/^\\.js$/");
             assert.equal(c.options.prefix, "");
         });
         
         it("should find modules on the file system", function() {
-            var c = new Configger({ root : "./test/specimens/simple/" }),
+            var c       = new Configger({ root : "./test/specimens/simple/" }),
                 modules = c._modules();
             
             assert(modules.length);
         });
         
-        it("should create groups from directories on the file system", function() {
-            var c = new Configger({ root : "./test/specimens/simple/" }),
-                groups = c._groups();
+        it("should find directories on the file system", function() {
+            var c    = new Configger({ root : "./test/specimens/simple/" }),
+                dirs = c._dirs();
                 
+            assert(dirs.length);
+            assert.equal(dirs[0], "/");
+            assert.equal(dirs[1], "subfolder");
+        });
+        
+        it("should find deeply-nested directories on the file system", function() {
+            var c    = new Configger({ root : "./test/specimens/standard/" }),
+                dirs = c._dirs();
+                
+            assert(dirs.length);
+            assert.equal(dirs[0], "/");
+            assert.equal(dirs[1], "subfolder");
+            assert.equal(dirs[2], "subfolder-b");
+            assert.equal(dirs[3], "subfolder-b" + path.sep + "sub-subfolder");
+            assert.equal(dirs[4], "subfolder-b" + path.sep + "sub-subfolder" + path.sep + "sub-sub-subfolder");
+        });
+        
+        it("should create groups from directories on the file system", function() {
+            var c      = new Configger({ root : "./test/specimens/simple/" }),
+                groups = c._groups();
+            
             assert(groups);
             assert(Object.keys(groups).length);
+            assert(groups["/"]);
             assert(groups["/subfolder/"]);
         });
         
         it("should find a config template on the file system", function() {
-            var c = new Configger({ root : "./test/specimens/simple/" }),
+            var c   = new Configger({ root : "./test/specimens/simple/" }),
                 ast = c._config();
             
             assert(ast);
@@ -44,14 +67,14 @@ describe("YUI Configger", function() {
         });
         
         it("should handle not finding a config template on the file system", function() {
-            var c = new Configger({ root : "./test/specimens/empty/" }),
+            var c   = new Configger({ root : "./test/specimens/empty/" }),
                 ast = c._config();
                 
             assert.equal(ast, undefined);
         });
         
         it("should parse a group template out of the config template", function() {
-            var c = new Configger({ root : "./test/specimens/group-template/" }),
+            var c      = new Configger({ root : "./test/specimens/group-template/" }),
                 config = c._config(),
                 template;
                 
@@ -68,6 +91,8 @@ describe("YUI Configger", function() {
             var c      = new Configger({ root : "./test/specimens/simple/", quiet : true }),
                 result = c.run();
             
+            console.log(result);
+            
             assert.equal(
                 result + "\n",
                 fs.readFileSync("./test/specimens/simple/_config.js", "utf8")
@@ -76,7 +101,9 @@ describe("YUI Configger", function() {
         
         it("should return a config string from run (group-template)", function() {
             var c = new Configger({ root : "./test/specimens/group-template/", quiet : true }),
-                result = c.run();
+                result;
+                
+            result = c.run();
             
             assert.equal(
                 result + "\n",
@@ -85,7 +112,7 @@ describe("YUI Configger", function() {
         });
         
         it("should bail if no ast can be generated", function() {
-            var c = new Configger({ root : "./test/specimens/empty/", quiet : true }),
+            var c      = new Configger({ root : "./test/specimens/empty/", quiet : true }),
                 result = c.run();
                 
             assert.equal(result, undefined);
