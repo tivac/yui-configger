@@ -15,20 +15,61 @@
                 },
                 "value" : {
                     "type" : "Literal",
-                    "value" : "configger"
+                    "value" : "/specimens/simple/"
                 },
                 "kind" : "init"
             }, {
                 "type" : "Property",
-                "key" : {
-                    "type" : "Identifier",
-                    "name" : "modules"
+                "key": {
+                    "type": "Identifier",
+                    "name": "modules"
                 },
-                "value" : {
-                    "type" : "Literal",
-                    "value" : "configger"
-                },
-                "kind" : "init"
+                "value": {
+                    "type": "ObjectExpression",
+                    "properties": [
+                        {
+                            "type": "Property",
+                            "key": {
+                                "type": "Literal",
+                                "value": "module-a"
+                            },
+                            "value": {
+                                "type": "ObjectExpression",
+                                "properties": [
+                                    {
+                                        "type": "Property",
+                                        "key": {
+                                            "type": "Identifier",
+                                            "name": "path"
+                                        },
+                                        "value": {
+                                            "type": "Literal",
+                                            "value": "a.js"
+                                        }
+                                    },
+                                    {
+                                        "type": "Property",
+                                        "key": {
+                                            "type": "Identifier",
+                                            "name": "requires"
+                                        },
+                                        "value": {
+                                            "type": "ArrayExpression",
+                                            "elements": [
+                                                {
+                                                    "type": "Literal",
+                                                    "value": "module-b"
+                                                }
+                                            ]
+                                        },
+                                        "kind": "init"
+                                    }
+                                ]
+                            },
+                            "kind" : "init"
+                        }
+                    ]
+                }
             }, {
                 "type" : "Property",
                 "key" : {
@@ -45,3 +86,5 @@
     },
     "kind" : "init"
 }
+
+

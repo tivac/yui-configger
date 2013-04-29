@@ -155,9 +155,9 @@ describe("YUI Configger", function() {
             
             g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
             
-            assert.deepEqual(
-                g.ast,
-                require("./specimens/simple/_existing-ast-result.json")
+            assert.equal(
+                JSON.stringify(g.ast, null, 4),
+                JSON.stringify(require("./specimens/simple/_existing-ast-result.json"), null, 4)
             );
         });
 
@@ -172,9 +172,9 @@ describe("YUI Configger", function() {
             
             g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
             
-            assert.deepEqual(
-                g.ast,
-                require("./specimens/simple/_existing-ast-literal-result.json")
+            assert.equal(
+                JSON.stringify(g.ast, null, 4),
+                JSON.stringify(require("./specimens/simple/_existing-ast-literal-result.json"), null, 4)
             );
         });
 
