@@ -1,7 +1,10 @@
 var test_config = {
     groups: {
         "/": {
-            base: "configger",
+            /*
+                comment one
+            */
+            base: "/",
             modules: {
                 "module-a": {
                     path: "a.js",
@@ -13,6 +16,8 @@ var test_config = {
             }
         },
         "/subfolder/": {
+            /* comment two */
+            base: "/subfolder/",
             modules: {
                 "module-b": {
                     path: "b.js",
