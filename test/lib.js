@@ -1,5 +1,5 @@
 /*jshint node :true */
-/*global describe, it, before, after */
+/*global describe, it */
 
 "use strict";
 
@@ -19,6 +19,10 @@ describe("YUI Configger", function() {
             assert.equal(fixup(false), false);
             assert.equal(fixup(undefined), undefined);
             assert.equal(fixup(o), o);
+        });
+        
+        it("should normalize an empty string to '/'", function() {
+            assert(fixup(""), "/");
         });
         
         it("should remove leading '.'s from paths", function() {
