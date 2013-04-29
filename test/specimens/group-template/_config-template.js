@@ -1,4 +1,4 @@
-/*global YUI:true */
+/*jshint yui:true */
 var test_config = {
     groups : {
         $group : {

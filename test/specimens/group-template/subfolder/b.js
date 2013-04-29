@@ -5,6 +5,6 @@ YUI.add("module-b", function(Y) {
 
 }, "@VERSION", {
     requires : [
-        "a"
+        "module-a"
     ]
 });

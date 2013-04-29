@@ -1,5 +1,5 @@
-/*jshint node :true */
-/*global describe, it, before, after */
+/*jshint node:true */
+/*global describe, it */
 
 "use strict";
 
@@ -78,11 +78,11 @@ describe("YUI Configger", function() {
             // module-a requires key
             assert.equal(ast.value.properties[0].value.properties[0].value.properties[1].key.name, "requires");
             // module-a requires value
-            assert.equal(ast.value.properties[0].value.properties[0].value.properties[1].value.elements[0].value, "b");
+            assert.equal(ast.value.properties[0].value.properties[0].value.properties[1].value.elements[0].value, "module-b");
         });
         
         it("should generate an AST from a template", function() {
-            var g, ast;
+            var g, ast, aRoot;
             
             g = new Group({
                 name     : "test",
@@ -125,20 +125,23 @@ describe("YUI Configger", function() {
             assert.equal(ast.value.properties[0].value.value, g.dir);
             // modules object
             assert.equal(ast.value.properties[1].key.name, "modules");
+            
+            aRoot = ast.value.properties[1].value.properties[0];
+            
             // module-a definition
-            assert.equal(ast.value.properties[1].value.properties[0].key.value, "module-a");
+            assert.equal(aRoot.key.value, "module-a");
             // module-a path key
-            assert.equal(ast.value.properties[1].value.properties[0].value.properties[0].key.name, "path");
+            assert.equal(aRoot.value.properties[0].key.name, "path");
             // module-a path value
-            assert.equal(ast.value.properties[1].value.properties[0].value.properties[0].value.value, "a.js");
+            assert.equal(aRoot.value.properties[0].value.value, "a.js");
             // module-a requires key
-            assert.equal(ast.value.properties[1].value.properties[0].value.properties[1].key.name, "requires");
+            assert.equal(aRoot.value.properties[1].key.name, "requires");
             // module-a requires value
-            assert.equal(ast.value.properties[1].value.properties[0].value.properties[1].value.elements[0].value, "b");
+            assert.equal(aRoot.value.properties[1].value.elements[0].value, "module-b");
         });
         
         it("should update existing ast objects (Identifier modules property)", function() {
-            var g, ast;
+            var g, ast, aRoot;
             
             g = new Group({
                 name     : "fooga",
@@ -202,16 +205,20 @@ describe("YUI Configger", function() {
             assert.equal(ast.value.properties[0].value.value, g.dir);
             // modules object
             assert.equal(ast.value.properties[1].key.name, "modules");
+            
+            aRoot = ast.value.properties[1].value.properties[0];
+            
             // module-a definition
-            assert.equal(ast.value.properties[1].value.properties[0].key.value, "module-a");
+            assert.equal(aRoot.key.value, "module-a");
             // module-a path key
-            assert.equal(ast.value.properties[1].value.properties[0].value.properties[0].key.name, "path");
+            assert.equal(aRoot.value.properties[0].key.name, "path");
             // module-a path value
-            assert.equal(ast.value.properties[1].value.properties[0].value.properties[0].value.value, "a.js");
+            assert.equal(aRoot.value.properties[0].value.value, "a.js");
             // module-a requires key
-            assert.equal(ast.value.properties[1].value.properties[0].value.properties[1].key.name, "requires");
+            assert.equal(aRoot.value.properties[1].key.name, "requires");
             // module-a requires value
-            assert.equal(ast.value.properties[1].value.properties[0].value.properties[1].value.elements[0].value, "b");
+            assert.equal(aRoot.value.properties[1].value.elements[0].value, "module-b");
+            
             // fooga property
             assert.equal(ast.value.properties[2].key.name, "fooga");
             // fooga property value
@@ -312,7 +319,7 @@ describe("YUI Configger", function() {
                                 },
                                 kind : "init"
                             }, {
-                                 type : "Property",
+                                type : "Property",
                                 key : {
                                     type : "Identifier",
                                     name : "base"

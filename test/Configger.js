@@ -1,9 +1,10 @@
-/*jshint node :true */
-/*global describe, it, before, after */
+/*jshint node:true */
+/*global describe, it */
 
 "use strict";
 
-var assert    = require("assert"),
+var fs        = require("fs"),
+    assert    = require("assert"),
     Configger = require("../lib/index.js");
 
 describe("YUI Configger", function() {
@@ -64,26 +65,23 @@ describe("YUI Configger", function() {
         });
         
         it("should return a config string from run (simple)", function() {
-            var c = new Configger({ root : "./test/specimens/simple/", quiet : true }),
+            var c      = new Configger({ root : "./test/specimens/simple/", quiet : true }),
                 result = c.run();
             
-            // TODO: better assertions (try to re-parse into AST & verify against that?)
-            assert(result.indexOf("var test_config") > -1);
-            assert(result.indexOf("module-b") > -1);
-            assert(result.indexOf("/subfolder/") > -1);
-            
-            assert.fail("Single /subfolder/ group", "Two /subfolder/ groups");
+            assert.equal(
+                result + "\n",
+                fs.readFileSync("./test/specimens/simple/_config.js", "utf8")
+            );
         });
         
         it("should return a config string from run (group-template)", function() {
             var c = new Configger({ root : "./test/specimens/group-template/", quiet : true }),
                 result = c.run();
             
-            // TODO: better assertions (try to re-parse into AST & verify against that?)
-            assert(result.indexOf("var test_config") > -1);
-            assert(result.indexOf("module-b") > -1);
-            assert(result.indexOf("/subfolder/sub-subfolder/") > -1);
-            assert(result.indexOf("module-c") > -1);
+            assert.equal(
+                result + "\n",
+                fs.readFileSync("./test/specimens/group-template/_config.js", "utf8")
+            );
         });
         
         it("should bail if no ast can be generated", function() {

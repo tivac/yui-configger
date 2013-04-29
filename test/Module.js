@@ -1,5 +1,5 @@
 /*jshint node:true */
-/*global describe, it, before, after */
+/*global describe, it */
 
 "use strict";
 

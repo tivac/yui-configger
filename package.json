@@ -32,7 +32,8 @@
     
     "scripts" : {
         "test"  : "istanbul test ./node_modules/mocha/bin/_mocha",
-        "debug" : "nodebug ./node_modules/mocha/bin/_mocha"
+        "debug" : "nodebug ./node_modules/mocha/bin/_mocha",
+        "watch" : "supervisor -n \"error|exit\" ./node_modules/mocha/bin/_mocha"
     },
     
     "license": "MIT",
