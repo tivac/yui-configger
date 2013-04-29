@@ -64,7 +64,7 @@ describe("YUI Configger", function() {
             var m = new Module();
             
             m._src = "var var = 5";
-            assert.equal(m._parse(), undefined);
+            assert.equal(m._parse(), "Unable to parse: " + undefined);
         });
         
         it("should parse files", function() {
@@ -85,6 +85,23 @@ describe("YUI Configger", function() {
             assert.equal(ast.type, "ObjectExpression");
             assert(ast.properties.length);
             assert(ast.properties[0].value.value, "c.js");
+        });
+        
+        it("should update module validity", function() {
+            var m  = new Module(),
+                m2 = new Module();
+            
+            assert.equal(m.valid, false);
+            assert.equal(m2.valid, false);
+            
+            m.file = "./test/specimens/simple/a.js";
+            
+            assert.equal(m.valid, true);
+            
+            m2._src = "var var = 5";
+            m2._parse();
+            
+            assert.equal(m2.valid, false);
         });
     });
 });
