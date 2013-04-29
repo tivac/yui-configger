@@ -3,7 +3,8 @@
 
 "use strict";
 
-var assert = require("assert"),
+var fs     = require("fs"),
+    assert = require("assert"),
     Group  = require("../lib/group.js"),
     Module = require("../lib/module.js");
 
@@ -58,7 +59,7 @@ describe("YUI Configger", function() {
         
         it("should generate a brand-new AST", function() {
             var g = new Group({ name : "test" }),
-                ast;
+                ast, aRoot;
             
             g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
             
@@ -69,16 +70,19 @@ describe("YUI Configger", function() {
             assert.equal(ast.key.value, g.name);
             // modules object
             assert.equal(ast.value.properties[0].key.name, "modules");
+            
+            aRoot = ast.value.properties[0].value.properties[0];
+            
             // module-a definition
-            assert.equal(ast.value.properties[0].value.properties[0].key.value, "module-a");
+            assert.equal(aRoot.key.value, "module-a");
             // module-a path key
-            assert.equal(ast.value.properties[0].value.properties[0].value.properties[0].key.name, "path");
+            assert.equal(aRoot.value.properties[0].key.name, "path");
             // module-a path value
-            assert.equal(ast.value.properties[0].value.properties[0].value.properties[0].value.value, "a.js");
+            assert.equal(aRoot.value.properties[0].value.value, "a.js");
             // module-a requires key
-            assert.equal(ast.value.properties[0].value.properties[0].value.properties[1].key.name, "requires");
+            assert.equal(aRoot.value.properties[1].key.name, "requires");
             // module-a requires value
-            assert.equal(ast.value.properties[0].value.properties[0].value.properties[1].value.elements[0].value, "module-b");
+            assert.equal(aRoot.value.properties[1].value.elements[0].value, "module-b");
         });
         
         it("should generate an AST from a template", function() {
@@ -141,154 +145,37 @@ describe("YUI Configger", function() {
         });
         
         it("should update existing ast objects (Identifier modules property)", function() {
-            var g, ast, aRoot;
+            var g;
             
             g = new Group({
                 name     : "fooga",
                 dir      : "/specimens/simple/",
-                existing : {
-                    type : "Property",
-                    key : {
-                        type : "Literal",
-                        value : "fooga"
-                    },
-                    value : {
-                        type : "ObjectExpression",
-                        properties : [
-                            {
-                                type : "Property",
-                                key : {
-                                    type : "Identifier",
-                                    name : "base"
-                                },
-                                value : {
-                                    type : "Literal",
-                                    value : "configger"
-                                },
-                                kind : "init"
-                            }, {
-                                type : "Property",
-                                key : {
-                                    type : "Identifier",
-                                    name : "modules"
-                                },
-                                value : {
-                                    type : "Literal",
-                                    value : "configger"
-                                },
-                                kind : "init"
-                            }, {
-                                type : "Property",
-                                key : {
-                                    type : "Identifier",
-                                    name : "fooga"
-                                },
-                                value : {
-                                    type : "Literal",
-                                    value : "wooga"
-                                },
-                                kind : "init"
-                            }
-                        ]
-                    },
-                    kind : "init"
-                },
+                existing : require("./specimens/simple/_existing-ast.json")
             });
             
             g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
             
-            ast = g.ast;
-            
-            // group name
-            assert.equal(ast.key.value, "fooga");
-            // group base
-            assert.equal(ast.value.properties[0].value.value, g.dir);
-            // modules object
-            assert.equal(ast.value.properties[1].key.name, "modules");
-            
-            aRoot = ast.value.properties[1].value.properties[0];
-            
-            // module-a definition
-            assert.equal(aRoot.key.value, "module-a");
-            // module-a path key
-            assert.equal(aRoot.value.properties[0].key.name, "path");
-            // module-a path value
-            assert.equal(aRoot.value.properties[0].value.value, "a.js");
-            // module-a requires key
-            assert.equal(aRoot.value.properties[1].key.name, "requires");
-            // module-a requires value
-            assert.equal(aRoot.value.properties[1].value.elements[0].value, "module-b");
-            
-            // fooga property
-            assert.equal(ast.value.properties[2].key.name, "fooga");
-            // fooga property value
-            assert.equal(ast.value.properties[2].value.value, "wooga");
+            assert.deepEqual(
+                g.ast,
+                require("./specimens/simple/_existing-ast-result.json")
+            );
         });
 
         it("should update existing ast objects (Literal \"modules\" property)", function() {
-            var g, ast;
+            var g;
             
             g = new Group({
                 name     : "fooga",
                 dir      : "/specimens/simple/",
-                existing : {
-                    type : "Property",
-                    key : {
-                        type : "Literal",
-                        value : "fooga"
-                    },
-                    value : {
-                        type : "ObjectExpression",
-                        properties : [
-                            {
-                                type : "Property",
-                                key : {
-                                    type : "Identifier",
-                                    name : "base"
-                                },
-                                value : {
-                                    type : "Literal",
-                                    value : "configger"
-                                },
-                                kind : "init"
-                            }, {
-                                type : "Property",
-                                key : {
-                                    type : "Literal",
-                                    value : "modules",
-                                    raw   : "\"modules\""
-                                },
-                                value : {
-                                    type : "Literal",
-                                    value : "configger"
-                                },
-                                kind : "init"
-                            }, {
-                                type : "Property",
-                                key : {
-                                    type : "Identifier",
-                                    name : "fooga"
-                                },
-                                value : {
-                                    type : "Literal",
-                                    value : "wooga"
-                                },
-                                kind : "init"
-                            }
-                        ]
-                    },
-                    kind : "init"
-                },
+                existing : require("./specimens/simple/_existing-ast-literal.json"),
             });
             
             g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
             
-            ast = g.ast;
-            
-            // group name
-            assert.equal(ast.key.value, "fooga");
-            // group base
-            assert.equal(ast.value.properties[0].value.value, g.dir);
+            assert.deepEqual(
+                g.ast,
+                require("./specimens/simple/_existing-ast-literal-result.json")
+            );
         });
 
         it("should only update base/root values that contain \"{dir}\"", function() {
