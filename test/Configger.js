@@ -32,7 +32,7 @@ describe("YUI Configger", function() {
                 dirs = c._dirs();
                 
             assert(dirs.length);
-            assert.equal(dirs[0], "/");
+            assert.equal(dirs[0], "");
             assert.equal(dirs[1], "subfolder");
         });
         
@@ -41,7 +41,7 @@ describe("YUI Configger", function() {
                 dirs = c._dirs();
                 
             assert(dirs.length);
-            assert.equal(dirs[0], "/");
+            assert.equal(dirs[0], "");
             assert.equal(dirs[1], "subfolder");
             assert.equal(dirs[2], "subfolder-b");
             assert.equal(dirs[3], "subfolder-b" + path.sep + "sub-subfolder");
@@ -88,25 +88,19 @@ describe("YUI Configger", function() {
         });
         
         it("should return a config string from run (simple)", function() {
-            var c      = new Configger({ root : "./test/specimens/simple/", quiet : true }),
-                result = c.run();
-            
-            console.log(result);
+            var c = new Configger({ root : "./test/specimens/simple/", quiet : true });
             
             assert.equal(
-                result + "\n",
+                c.run() + "\n",
                 fs.readFileSync("./test/specimens/simple/_config.js", "utf8")
             );
         });
         
         it("should return a config string from run (group-template)", function() {
-            var c = new Configger({ root : "./test/specimens/group-template/", quiet : true }),
-                result;
-                
-            result = c.run();
-            
+            var c = new Configger({ root : "./test/specimens/group-template/", quiet : true });
+               
             assert.equal(
-                result + "\n",
+                c.run() + "\n",
                 fs.readFileSync("./test/specimens/group-template/_config.js", "utf8")
             );
         });
