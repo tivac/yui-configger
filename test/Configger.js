@@ -106,10 +106,9 @@ describe("YUI Configger", function() {
         });
         
         it("should bail if no ast can be generated", function() {
-            var c      = new Configger({ root : "./test/specimens/empty/", quiet : true }),
-                result = c.run();
+            var c = new Configger({ root : "./test/specimens/empty/", quiet : true });
                 
-            assert.equal(result, undefined);
+            assert.equal(c.run(), undefined);
         });
     });
 });
