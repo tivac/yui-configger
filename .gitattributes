@@ -4,3 +4,6 @@
 
 # So NPM publishes from windows don't screw things up
 bin/*   eol=lf
+
+# So test comparisons are accurate-ish
+test/*  eol=lf
