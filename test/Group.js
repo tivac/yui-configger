@@ -209,7 +209,7 @@ describe("YUI Configger", function() {
                                 type : "Property",
                                 key : {
                                     type : "Identifier",
-                                    name : "base"
+                                    name : "root"
                                 },
                                 value : {
                                     type  : "Literal",
@@ -227,6 +227,9 @@ describe("YUI Configger", function() {
             g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
             
             ast = g.ast;
+            
+            assert.equal(ast.value.properties[0].value.value, "/test/specimens/simple/");
+            assert.equal(ast.value.properties[0].value.raw, "\"/test/specimens/simple/\"");
             
             assert.equal(ast.value.properties[1].value.value, "{dir");
             assert.equal(ast.value.properties[1].value.raw, "\"{dir\"");
