@@ -68,10 +68,12 @@ describe("YUI Configger", function() {
             // This gets... fun
             // group name
             assert.equal(ast.key.value, g.name);
+            // base
+            assert.equal(ast.value.properties[0].key.name, "base");
             // modules object
-            assert.equal(ast.value.properties[0].key.name, "modules");
+            assert.equal(ast.value.properties[1].key.name, "modules");
             
-            aRoot = ast.value.properties[0].value.properties[0];
+            aRoot = ast.value.properties[1].value.properties[0];
             
             // module-a definition
             assert.equal(aRoot.key.value, "module-a");
