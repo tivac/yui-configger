@@ -1,7 +1,9 @@
-/*jshint yui:true */
+/*exported test_config */
 var test_config = {
         groups: {
             "/": {
+                base: "/",
+                root: "TEST/",
                 modules: {
                     "module-a": {
                         path: "a.js",
@@ -10,6 +12,8 @@ var test_config = {
                 }
             },
             "/subfolder/": {
+                base: "/subfolder/",
+                root: "TEST/subfolder/",
                 modules: {
                     "module-b": {
                         path: "b.js",
@@ -18,6 +22,8 @@ var test_config = {
                 }
             },
             "/subfolder/sub-subfolder/": {
+                base: "/subfolder/sub-subfolder/",
+                root: "TEST/subfolder/sub-subfolder/",
                 modules: {
                     "module-c": {
                         path: "c.js",

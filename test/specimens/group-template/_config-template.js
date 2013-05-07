@@ -1,8 +1,9 @@
-/*jshint yui:true */
+/*exported test_config */
 var test_config = {
     groups : {
         $group : {
-            base : "{dir}"
+            base : "{dir}",
+            root : "TEST{dir}"
         }
     }
 };
