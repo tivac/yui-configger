@@ -105,6 +105,17 @@ describe("YUI Configger", function() {
             );
         });
         
+        it("should return a config string from run (standard)", function() {
+            var c = new Configger({ root : "./test/specimens/standard/", quiet : true });
+           
+            fs.writeFileSync("./standard.js", c.run() + "\n");
+           
+            assert.equal(
+                c.run() + "\n",
+                fs.readFileSync("./test/specimens/standard/_config.js", "utf8")
+            );
+        });
+        
         it("should bail if no ast can be generated", function() {
             var c = new Configger({ root : "./test/specimens/empty/", quiet : true });
                 

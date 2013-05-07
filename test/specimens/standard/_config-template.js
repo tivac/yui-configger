@@ -1,18 +1,14 @@
-/*global YUI:true */
+/*exported test_config */
 var test_config = {
     groups : {
-        root : {
+        "/" : {
             /* live
             combine   : true,
+            */
+            
             comboBase : "/combo/_",
             root      : "/js/",
-            //live */
-
-            //* dev
-            base : "/js/",
-            //dev */
-
-            modules : "configger"
+            base      : "/js/"
         },
 
         "test-root" : {
@@ -29,18 +25,18 @@ var test_config = {
             modules : "configger"
         },
 
-        subfolder : {
-            /*aliases : {
+        "/subfolder/" : {
+            aliases : {
                 "home" : [
                     "view-home",
                     "page-home"
                 ]
-            },*/
+            },
 
             modules : "configger"
         },
 
-        "subfolder-b" : {
+        "/subfolder-b/" : {
             "modules" : "configger"
         },
 
