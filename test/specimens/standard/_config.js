@@ -1,10 +1,6 @@
-/*exported test_config */
 var test_config = {
         groups: {
             "/": {
-                /* live
-                combine   : true,
-                */
                 comboBase: "/combo/_",
                 root: "/",
                 base: "/",
@@ -43,15 +39,7 @@ var test_config = {
                 }
             },
             "test-root": {
-                /* live
-                combine   : true,
-                comboBase : "/combo/_",
-                root      : "/js/",
-                //live */
-
-                //* dev
-                base : "/js/",
-                //dev */
+                base: "/js/",
                 modules: "configger"
             },
             "/subfolder/": {
@@ -113,9 +101,13 @@ var test_config = {
                 }
             },
             "test-subfolder": { modules: "configger" },
-            "/subfolder-b/sub-subfolder/": { base: "/subfolder-b/sub-subfolder/",
-                modules: { "module-j": { path: "j.js" } } },
-            "/subfolder-b/sub-subfolder/sub-sub-subfolder/": { base: "/subfolder-b/sub-subfolder/sub-sub-subfolder/",
-                modules: { "module-k": { path: "k.js" } } }
+            "/subfolder-b/sub-subfolder/": {
+                base: "/subfolder-b/sub-subfolder/",
+                modules: { "module-j": { path: "j.js" } }
+            },
+            "/subfolder-b/sub-subfolder/sub-sub-subfolder/": {
+                base: "/subfolder-b/sub-subfolder/sub-sub-subfolder/",
+                modules: { "module-k": { path: "k.js" } }
+            }
         }
     };

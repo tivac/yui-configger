@@ -1,4 +1,3 @@
-/*exported test_config */
 var test_config = {
         groups: {
             "/": {
