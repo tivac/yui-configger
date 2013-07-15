@@ -6,6 +6,7 @@
 var fs        = require("fs"),
     path      = require("path"),
     assert    = require("assert"),
+    
     Configger = require("../lib/index.js");
 
 describe("YUI Configger", function() {
@@ -35,21 +36,6 @@ describe("YUI Configger", function() {
             assert.equal(c.options.filter.toString(), "/./");
             assert.equal(c.options.extension.toString(), "/^\\.js$/");
             assert.equal(c.options.prefix, "");
-        });
-        
-        it("should log to the console", function() {
-            var c = new Configger({
-                    root  : "./test/specimens/simple/",
-                    quiet : false
-                });
-            
-            c.console = {
-                log : function() {
-                    assert(true)
-                }
-            };
-            
-            c._console("log", "test");
         });
         
         it("should find modules on the file system", function() {
@@ -121,7 +107,10 @@ describe("YUI Configger", function() {
         });
         
         it("should return a config string from run (simple)", function() {
-            var c = new Configger({ root : "./test/specimens/simple/", quiet : true });
+            var c = new Configger({
+                    root  : "./test/specimens/simple/",
+                    level : "silent"
+                });
             
             assert.equal(
                 c.run() + "\n",
@@ -130,7 +119,10 @@ describe("YUI Configger", function() {
         });
         
         it("should return a config string from run (group-template)", function() {
-            var c = new Configger({ root : "./test/specimens/group-template/", quiet : true });
+            var c = new Configger({
+                    root  : "./test/specimens/group-template/",
+                    level : "silent"
+                });
                
             assert.equal(
                 c.run() + "\n",
@@ -139,7 +131,10 @@ describe("YUI Configger", function() {
         });
         
         it("should return a config string from run (standard)", function() {
-            var c = new Configger({ root : "./test/specimens/standard/", quiet : true });
+            var c = new Configger({
+                    root  : "./test/specimens/standard/",
+                    level : "silent"
+                });
            
             assert.equal(
                 c.run() + "\n",
@@ -148,7 +143,10 @@ describe("YUI Configger", function() {
         });
         
         it("should bail if no ast can be generated", function() {
-            var c = new Configger({ root : "./test/specimens/empty/", quiet : true });
+            var c = new Configger({
+                    root  : "./test/specimens/empty/",
+                    level : "silent"
+                });
                 
             assert.equal(c.run(), undefined);
         });

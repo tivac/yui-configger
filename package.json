@@ -20,6 +20,7 @@
         "wrench"     : "1.5.x",
         "optimist"   : "0.6.x",
         "clone"      : "0.1.x",
+        "npmlog"     : "0.0.x",
         
         "escape-regexp-component" : "1.0.x"
     },

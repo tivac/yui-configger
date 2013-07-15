@@ -6,23 +6,9 @@
         "type"    : "string"
     },
     
-    "quiet" : {
-        "alias"   : "q",
-        "desc"    : "Minimal output",
-        "default" : true,
-        "type"    : "boolean"
-    },
-    
-    "output" : {
-        "alias"   : "o",
-        "desc"    : "Output file for generated config (defaults to stdout)",
-        "type"    : "string"
-    },
-    
-    "tmpl" : {
-        "alias"   : "t",
-        "desc"    : "YUI config file to use as template",
-        "default" : "_config-template.js",
+    "extension" : {
+        "desc"    : "File extension filter (regex)",
+        "default" : "^\\.js$",
         "type"    : "string"
     },
     
@@ -33,9 +19,16 @@
         "type"    : "string"
     },
     
-    "extension" : {
-        "desc"    : "File extension filter (regex)",
-        "default" : "^\\.js$",
+    "level" : {
+        "alias"   : "l",
+        "desc"    : "Logging level",
+        "default" : "warn",
+        "type"    : "string"
+    },
+    
+    "output" : {
+        "alias"   : "o",
+        "desc"    : "Output file for generated config (defaults to stdout)",
         "type"    : "string"
     },
     
@@ -44,5 +37,19 @@
         "desc"    : "Prefix for group names",
         "default" : "",
         "type"    : "string"
+    },
+    
+    "tmpl" : {
+        "alias"   : "t",
+        "desc"    : "YUI config file to use as template",
+        "default" : "_config-template.js",
+        "type"    : "string"
+    },
+    
+    "verbose" : {
+        "alias"   : "v",
+        "desc"    : "Chatty output",
+        "default" : false,
+        "type"    : "boolean"
     }
 }
