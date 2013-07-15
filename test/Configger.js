@@ -20,6 +20,38 @@ describe("YUI Configger", function() {
             assert.equal(c.options.prefix, "");
         });
         
+        it("shouldn't load defaults when the CLI provided them", function() {
+            var c = new Configger({
+                    cli       : true,
+                    root      : "./test/specimens/simple/",
+                    tmpl      : "_config-template.js",
+                    filter    : ".",
+                    extension : "^\\.js$",
+                    prefix    : ""
+                });
+            
+            assert.equal(c.options.root, "./test/specimens/simple/");
+            assert.equal(c.options.tmpl, "_config-template.js");
+            assert.equal(c.options.filter.toString(), "/./");
+            assert.equal(c.options.extension.toString(), "/^\\.js$/");
+            assert.equal(c.options.prefix, "");
+        });
+        
+        it("should log to the console", function() {
+            var c = new Configger({
+                    root  : "./test/specimens/simple/",
+                    quiet : false
+                });
+            
+            c.console = {
+                log : function() {
+                    assert(true)
+                }
+            };
+            
+            c._console("log", "test");
+        });
+        
         it("should find modules on the file system", function() {
             var c       = new Configger({ root : "./test/specimens/simple/" }),
                 modules = c._modules();
@@ -33,7 +65,8 @@ describe("YUI Configger", function() {
                 
             assert(dirs.length);
             assert.equal(dirs[0], "");
-            assert.equal(dirs[1], "subfolder");
+            assert.equal(dirs[1], "empty");
+            assert.equal(dirs[2], "subfolder");
         });
         
         it("should find deeply-nested directories on the file system", function() {
