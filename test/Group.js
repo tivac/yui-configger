@@ -40,12 +40,6 @@ describe("YUI Configger", function() {
             assert.equal(g.modules[0], "module");
         });
         
-        it("should bail if there are no modules", function() {
-            var g = new Group({ name : "test" });
-            
-            assert.equal(g.ast, undefined);
-        });
-        
         it("shouldn't include modules w/o files", function() {
             var g = new Group(),
                 modules;
