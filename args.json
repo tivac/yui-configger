@@ -1,39 +1,55 @@
 {
     "root" : {
-        "demand"      : true,
-        "alias"       : "r",
-        "description" : "Root directory to read YUI modules from"
+        "demand"  : true,
+        "alias"   : "r",
+        "desc"    : "Root directory to read YUI modules from",
+        "type"    : "string"
     },
-    "comments" : {
-        "alias"       : "c",
-        "description" : "Keep comments from template in generated file"
+    
+    "extension" : {
+        "desc"    : "File extension filter (regex)",
+        "default" : "^\\.js$",
+        "type"    : "string"
     },
-    "quiet" : {
-        "alias"       : "q",
-        "description" : "Minimal output"
-    },
-    "output" : {
-        "alias"       : "o",
-        "description" : "Output file for generated config (defaults to stdout)"
-    },
-    "tmpl" : {
-        "alias"       : "t",
-        "description" : "YUI config file to use as template",
-        "default"     : "_config-template.js"
-    },
+    
     "filter" : {
-        "alias"       : "f",
-        "description" : "File-name filter (regex)",
-        "default"     : "."
+        "alias"   : "f",
+        "desc"    : "File-name filter (regex)",
+        "default" : ".",
+        "type"    : "string"
     },
-    "key" : {
-        "alias"       : "k",
-        "description" : "Key in config to replace with module metadata",
-        "default"     : "configger"
+    
+    "level" : {
+        "alias"   : "l",
+        "desc"    : "Logging level",
+        "default" : "warn",
+        "type"    : "string"
     },
+    
+    "output" : {
+        "alias"   : "o",
+        "desc"    : "Output file for generated config (defaults to stdout)",
+        "type"    : "string"
+    },
+    
     "prefix" : {
-        "alias"       : "p",
-        "description" : "Prefix for group names",
-        "default"     : ""
+        "alias"   : "p",
+        "desc"    : "Prefix for group names",
+        "default" : "",
+        "type"    : "string"
+    },
+    
+    "tmpl" : {
+        "alias"   : "t",
+        "desc"    : "YUI config file to use as template",
+        "default" : "_config-template.js",
+        "type"    : "string"
+    },
+    
+    "verbose" : {
+        "alias"   : "v",
+        "desc"    : "Chatty output",
+        "default" : false,
+        "type"    : "boolean"
     }
 }

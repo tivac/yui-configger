@@ -1,0 +1,48 @@
+{
+    "type" : "Property",
+    "key" : {
+        "type" : "Literal",
+        "value" : "fooga"
+    },
+    "value" : {
+        "type" : "ObjectExpression",
+        "properties" : [
+            {
+                "type" : "Property",
+                "key" : {
+                    "type" : "Identifier",
+                    "name" : "base"
+                },
+                "value" : {
+                    "type"  : "Literal",
+                    "value" : "configger"
+                },
+                "kind" : "init"
+            }, {
+                "type" : "Property",
+                "key" : {
+                    "type"  : "Literal",
+                    "value" : "modules",
+                    "raw"   : "\"modules\""
+                },
+                "value" : {
+                    "type" : "Literal",
+                    "value" : "configger"
+                },
+                "kind" : "init"
+            }, {
+                "type" : "Property",
+                "key" : {
+                    "type" : "Identifier",
+                    "name" : "fooga"
+                },
+                "value" : {
+                    "type"  : "Literal",
+                    "value" : "wooga"
+                },
+                "kind" : "init"
+            }
+        ]
+    },
+    "kind" : "init"
+}

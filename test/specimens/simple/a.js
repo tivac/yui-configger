@@ -1,10 +1,10 @@
 /*global YUI:true */
-YUI.add("module-b", function(Y) {
+YUI.add("module-a", function(Y) {
 
     //nothing, because it doesn't matter
 
 }, "@VERSION", {
     requires : [
-        "a"
+        "module-b"
     ]
 });
