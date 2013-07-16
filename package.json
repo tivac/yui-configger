@@ -1,29 +1,50 @@
 {
-    "name" : "yui-configger",
-    "version" : "0.1.7",
-    "description" : "Extract meta-data from a folder of YUI modules & generate a Loader config",
+    "name"         : "yui-configger",
+    "version"      : "0.2.0",
+    "description"  : "Extract meta-data from a folder of YUI modules & generate a Loader config",
     "preferGlobal" : true,
-    "author" : "Pat Cavit <pcavit@gmail.com",
-    "bugs" : "https://github.com/tivac/yui-configger/issues",
-    "bin": "./bin/cli.js",
-    "main" : "./lib/configger.js",
+    "author"       : "Pat Cavit <pcavit@gmail.com",
+    "bugs"         : "https://github.com/tivac/yui-configger/issues",
+    "bin"          : "./bin/cli.js",
+    "main"         : "./lib/configger.js",
+    
     "repository": {
         "type": "git",
         "url": "https://github.com/tivac/yui-configger.git"
     },
+    
     "dependencies" : {
-        "esprima"   : "0.9.x",
-        "escodegen" : "0.0.x",
-        "wrench"    : "1.3.x",
-        "optimist"  : "0.3.x",
-        "traverse"  : "0.6.x"
+        "esprima"    : "1.0.x",
+        "escodegen"  : "0.0.x",
+        "estraverse" : "1.1.x",
+        "wrench"     : "1.5.x",
+        "optimist"   : "0.6.x",
+        "clone"      : "0.1.x",
+        "npmlog"     : "0.0.x",
+        
+        "escape-regexp-component" : "1.0.x"
     },
+    
+    "devDependencies" : {
+        "mocha"    : "1.12.x",
+        "istanbul" : "0.1.x"
+    },
+    
+    "scripts" : {
+        "test"  : "istanbul test ./node_modules/mocha/bin/_mocha",
+        "debug" : "nodebug ./node_modules/mocha/bin/_mocha",
+        "watch" : "supervisor -n \"error|exit\" ./node_modules/mocha/bin/_mocha"
+    },
+    
     "license": "MIT",
+    
     "engine": {
         "node": ">=0.8"
     },
+    
     "keywords": [
         "yui",
-        "config"
+        "config",
+        "esprima"
     ]
 }

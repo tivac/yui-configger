@@ -3,6 +3,10 @@ yui-configger
 
 Console script to extract meta-data from a folder of YUI modules & generate a Loader config
 
+[![Build Status](https://travis-ci.org/tivac/yui-configger.png?branch=rethinking-everything)](https://travis-ci.org/tivac/yui-configger)
+[![Packages](https://david-dm.org/tivac/yui-configger/status.png)](https://david-dm.org/tivac/yui-configger/)
+[![Dev Packages](https://david-dm.org/tivac/yui-configger/dev-status.png)](https://david-dm.org/tivac/yui-configger/)
+
 ## Install ##
 
     npm -g install yui-configger

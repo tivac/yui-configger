@@ -10,19 +10,26 @@ var fs   = require("fs"),
             .options(require("../args.json"))
             .argv,
 
-    Configger = require("../lib/configger.js"),
+    Configger = require("../lib/"),
     configger = new Configger(argv),
-    output    = configger.run(),
-    save;
+    output    = configger.run();
 
-save = function(output) {
+if(!output) {
+    // if we just used process.exit(1) here it would finish before the console.error
+    // was done writing and Ant wouldn't ever see the output
+    process.on("exit", function() {
+        process.exit(1);
+    });
+    
+    return;
+}
+
+if(argv.output) {
     var file = path.resolve(argv.output);
 
     fs.writeFileSync(file, output);
-};
-
-if(argv.output) {
-    save(output);
-} else {
-    console.log(output);
+    
+    return;
 }
+
+console.log(output);
