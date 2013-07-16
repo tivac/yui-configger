@@ -23,12 +23,13 @@ describe("YUI Configger", function() {
         
         it("shouldn't load defaults when the CLI provided them", function() {
             var c = new Configger({
-                    cli       : true,
+                    "$0"      : true,
                     root      : "./test/specimens/simple/",
                     tmpl      : "_config-template.js",
                     filter    : ".",
                     extension : "^\\.js$",
-                    prefix    : ""
+                    prefix    : "",
+                    verbose   : true
                 });
             
             assert.equal(c.options.root, "./test/specimens/simple/");
@@ -36,6 +37,7 @@ describe("YUI Configger", function() {
             assert.equal(c.options.filter.toString(), "/./");
             assert.equal(c.options.extension.toString(), "/^\\.js$/");
             assert.equal(c.options.prefix, "");
+            assert.equal(c.options.verbose, true);
         });
         
         it("should find modules on the file system", function() {
