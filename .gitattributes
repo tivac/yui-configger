@@ -3,7 +3,7 @@
 *.json  text
 
 # So NPM publishes from windows don't screw things up
-bin/*   eol=lf
+bin/*   text eol=lf
 
 # So test comparisons are accurate-ish
-test/*  eol=lf
+test/*  text eol=lf
