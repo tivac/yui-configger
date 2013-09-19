@@ -1,0 +1,25 @@
+############
+## OS
+############
+
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+
+#############
+## Node/NPM
+#############
+
+node_modules
+
+############
+## Configger
+############
+
+# Testing file output
+coverage
+test
+.travis.yml
+.gitignore
+.gitattributes
