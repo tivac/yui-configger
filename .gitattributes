@@ -4,7 +4,4 @@
 *.md    text
 
 # So NPM publishes from windows don't screw things up
-bin/   text eol=lf
-
-# So test comparisons are accurate-ish
-test/specimens/     text eol=lf
+bin/*   text eol=lf
