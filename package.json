@@ -1,6 +1,6 @@
 {
   "name": "yui-configger",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Extract meta-data from a folder of YUI modules & generate a Loader config",
   "preferGlobal": true,
   "author": "Pat Cavit <pcavit@gmail.com",
@@ -22,8 +22,8 @@
     "escape-regexp-component": "1.0.x"
   },
   "devDependencies": {
-    "mocha": "~1.15.1",
-    "istanbul": "0.1.x"
+    "mocha": "~1.16.2",
+    "istanbul": "~0.2.3"
   },
   "scripts": {
     "test": "istanbul test --print both ./node_modules/mocha/bin/_mocha",
