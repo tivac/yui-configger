@@ -7,7 +7,7 @@ var fs        = require("fs"),
     assert    = require("assert"),
     exec      = require("child_process").exec;
 
-describe("YUI Configger", function() {
+describe("yui-configger", function() {
     describe("CLI", function() {
         
         it("should return a config string from run (simple)", function(done) {

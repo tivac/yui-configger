@@ -6,7 +6,7 @@
 var assert = require("assert"),
     fixup  = require("../lib/lib.js").pathFixup;
     
-describe("YUI Configger", function() {
+describe("yui-configger", function() {
     describe("lib", function() {
         it("should provide a `pathFixup` function", function() {
             assert(fixup);

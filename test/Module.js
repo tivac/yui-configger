@@ -6,7 +6,7 @@
 var assert = require("assert"),
     Module = require("../lib/module.js");
 
-describe("YUI Configger", function() {
+describe("yui-configger", function() {
     describe("Module", function() {
         it("should instantiate", function() {
             new Module();
