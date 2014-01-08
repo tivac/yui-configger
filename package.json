@@ -5,7 +5,9 @@
   "preferGlobal": true,
   "author": "Pat Cavit <pcavit@gmail.com",
   "bugs": "https://github.com/tivac/yui-configger/issues",
-  "bin": "./bin/cli.js",
+  "bin": {
+    "configger" : "./bin/cli.js"
+  },
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
