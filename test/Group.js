@@ -8,7 +8,7 @@ var fs     = require("fs"),
     Group  = require("../lib/group.js"),
     Module = require("../lib/module.js");
 
-describe("YUI Configger", function() {
+describe("yui-configger", function() {
     describe("Group", function() {
         it("should store its name", function() {
             var g = new Group({ name : "test" });

@@ -9,7 +9,7 @@ var fs        = require("fs"),
     
     Configger = require("../lib/index.js");
 
-describe("YUI Configger", function() {
+describe("yui-configger", function() {
     describe("Configger Class", function() {
         it("should load defaults from args.json", function() {
             var c = new Configger({ root : "./test/specimens/simple/" });
@@ -50,7 +50,7 @@ describe("YUI Configger", function() {
         it("should find directories on the file system", function() {
             var c    = new Configger({ root : "./test/specimens/simple/" }),
                 dirs = c._dirs();
-                
+            
             assert(dirs.length);
             assert.equal(dirs[0], "");
             assert.equal(dirs[1], "empty");
