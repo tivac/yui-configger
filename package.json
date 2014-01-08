@@ -17,11 +17,11 @@
     "esprima": "1.0.x",
     "escodegen": "~1.0.1",
     "estraverse": "~1.5.0",
-    "wrench": "1.5.x",
     "optimist": "0.6.x",
     "clone": "0.1.x",
     "npmlog": "0.0.x",
-    "escape-regexp-component": "1.0.x"
+    "escape-regexp-component": "1.0.x",
+    "shelljs": "~0.2.6"
   },
   "devDependencies": {
     "mocha": "~1.16.2",
