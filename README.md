@@ -1,6 +1,9 @@
 yui-configger
 =============
-[![Build Status](https://travis-ci.org/tivac/yui-configger.png?branch=master)](https://travis-ci.org/tivac/yui-configger) [![NPM version](https://badge.fury.io/js/yui-configger.png)](http://badge.fury.io/js/yui-configger) [![Dependency Status](https://gemnasium.com/tivac/yui-configger.png)](https://gemnasium.com/tivac/yui-configger)
+[![Build Status](https://travis-ci.org/tivac/yui-configger.png?branch=master)](https://travis-ci.org/tivac/yui-configger)
+[![NPM version](https://badge.fury.io/js/yui-configger.png)](http://badge.fury.io/js/yui-configger)
+[![Dependency Status](https://david-dm.org/tivac/yui-configger.png?theme=shields.io)](https://david-dm.org/tivac/yui-configger)
+[![devDependency Status](https://david-dm.org/tivac/yui-configger/dev-status.png?theme=shields.io)](https://david-dm.org/tivac/yui-configger#info=devDependencies)
 
 Utility to extract meta-data from a folder of YUI modules & generate a Loader config object.
 
