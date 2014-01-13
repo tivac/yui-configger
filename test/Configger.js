@@ -7,18 +7,20 @@ var fs        = require("fs"),
     path      = require("path"),
     assert    = require("assert"),
     
-    Configger = require("../lib/index.js");
+    Configger = require("../lib/configger.js");
 
 describe("yui-configger", function() {
     describe("Configger Class", function() {
         it("should load defaults from args.json", function() {
             var c = new Configger({ root : "./test/specimens/simple/" });
             
-            assert.equal(c.options.root, "./test/specimens/simple/");
-            assert.equal(c.options.tmpl, "_config-template.js");
-            assert.equal(c.options.filter.toString(), "/./");
-            assert.equal(c.options.extension.toString(), "/^\\.js$/");
-            assert.equal(c.options.prefix, "");
+            assert.equal(c.options.root,            "./test/specimens/simple/");
+            assert.equal(c.options.tmpl,            "_config-template.js");
+            assert.equal(c.options.filter,          ".");
+            assert.equal(c.options.extension,       "^\\.js$");
+            assert.equal(c.options.prefix,          "");
+            assert.equal(c.options.cssextension,    "^\\.css$");
+            assert.equal(c.options.cssprefix,       "css-");
         });
         
         it("shouldn't load defaults when the CLI provided them", function() {
@@ -26,18 +28,18 @@ describe("yui-configger", function() {
                     "$0"      : true,
                     root      : "./test/specimens/simple/",
                     tmpl      : "_config-template.js",
-                    filter    : ".",
-                    extension : "^\\.js$",
+                    filter    : "fooga.js",
+                    extension : "^\\.jss$",
                     prefix    : "",
                     verbose   : true
                 });
             
-            assert.equal(c.options.root, "./test/specimens/simple/");
-            assert.equal(c.options.tmpl, "_config-template.js");
-            assert.equal(c.options.filter.toString(), "/./");
-            assert.equal(c.options.extension.toString(), "/^\\.js$/");
-            assert.equal(c.options.prefix, "");
-            assert.equal(c.options.verbose, true);
+            assert.equal(c.options.root,        "./test/specimens/simple/");
+            assert.equal(c.options.tmpl,        "_config-template.js");
+            assert.equal(c.options.filter,      "fooga.js");
+            assert.equal(c.options.extension,   "^\\.jss$");
+            assert.equal(c.options.prefix,      "");
+            assert.equal(c.options.verbose,     true);
         });
         
         it("should find modules on the file system", function() {
@@ -88,10 +90,9 @@ describe("yui-configger", function() {
         });
         
         it("should handle not finding a config template on the file system", function() {
-            var c   = new Configger({ root : "./test/specimens/empty/" }),
-                ast = c._config();
-                
-            assert.equal(ast, undefined);
+            var c = new Configger({ root : "./test/specimens/empty/" });
+            
+            assert.equal(c._config(), undefined);
         });
         
         it("should parse a group template out of the config template", function() {
@@ -141,6 +142,31 @@ describe("yui-configger", function() {
             assert.equal(
                 c.run() + "\n",
                 fs.readFileSync("./test/specimens/standard/_config.js", "utf8")
+            );
+        });
+
+        it("should return a config string from run (mixed)", function() {
+            var c = new Configger({
+                    root  : "./test/specimens/mixed/",
+                    level : "silent"
+                });
+           
+            assert.equal(
+                c.run() + "\n",
+                fs.readFileSync("./test/specimens/mixed/_config.js", "utf8")
+            );
+        });
+
+        it("should return a config string containing CSS from run (mixed)", function() {
+            var c = new Configger({
+                    root  : "./test/specimens/mixed/",
+                    level : "silent",
+                    css   : true
+                });
+           
+            assert.equal(
+                c.run() + "\n",
+                fs.readFileSync("./test/specimens/mixed/_config-css.js", "utf8")
             );
         });
         
