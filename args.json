@@ -34,7 +34,7 @@
     
     "tmpl" : {
         "alias"   : "t",
-        "desc"    : "YUI config file to use as template",
+        "desc"    : "YUI config file template",
         "default" : "_config-template.js",
         "type"    : "string"
     },
