@@ -5,7 +5,80 @@ yui-configger
 [![Dependency Status](https://david-dm.org/tivac/yui-configger.png?theme=shields.io)](https://david-dm.org/tivac/yui-configger)
 [![devDependency Status](https://david-dm.org/tivac/yui-configger/dev-status.png?theme=shields.io)](https://david-dm.org/tivac/yui-configger#info=devDependencies)
 
-Utility to extract meta-data from a folder of YUI modules & generate a Loader config object.
+Extract meta-data from a folder of YUI modules & generate a Loader config object. Writing out a config file by hand sucks, so let's automate the process!
+
+## Example ##
+
+Let's say you have a folder of YUI modules, looking something like this:
+
+```
+/app
+|-- main
+|   |-- a.js
+|   |-- b.js
+|   `-- c.js
+|
+|-- shared
+|   |-- d.js
+|   |-- e.js
+|   `-- f.js
+|
+|-- test
+|   |-- g.js
+|   `-- h.js
+|
+`-- _config-template.js
+```
+
+Where each module looks something like this:
+
+```javascript
+YUI.add("a.js", function(Y) {
+    ...
+}, "@VERSION@", {
+    requires : [
+        "event",
+        "io"
+    ]
+});
+```
+
+Running `configger -r /app` will generate a config with a structure like the following
+
+```javascript
+var config = {
+    groups : {
+        "main" : {
+            base : "/app/main",
+            modules : {
+                "a" : {
+                    path : "a.js",
+                    requires : [
+                        "event",
+                        "io"
+                    ]
+                },
+
+                "b" : {
+                    ...
+                },
+
+                "c" : {
+                    ...
+                }
+            }
+        },
+
+        "shared" : {
+            ...
+        },
+
+        "test" : {
+            ...
+        }
+    }
+};
+```
 
 ## Install ##
 
@@ -13,19 +86,33 @@ Utility to extract meta-data from a folder of YUI modules & generate a Loader co
 
 ## Usage ##
 
+### CLI ###
+
     Generate a YUI config.
     Usage: yui-configger -r [dir]
     
     Options:
-      --root, -r     Root directory to read YUI modules from                [required]
-      --extension    File extension filter (regex)                          [default: "^\\.js$"]
+      --root,   -r   Root directory to read YUI modules from                [required]
       --filter, -f   File-name filter (regex)                               [default: "."]
-      --level, -l    Logging level                                          [default: "warn"]
       --output, -o   Output file for generated config                       [default: stdout]
       --prefix, -p   Prefix for group names                                 [default: ""]
-      --tmpl, -t     YUI config file to use as template                     [default: "_config-template.js"]
-      --verbose, -v  Chatty output                                          [default: false]
+      --tmpl,   -t   YUI config file template                               [default: "_config-template.js"]
+      --extension    File extension filter (regex)                          [default: "^\\.js$"]
+      --loglevel                                                            [default: "info"]
+      --verbose                                                             [default: false]
+      --silent                                                              [default: false]
 
+### Programmatic ###
+
+```javascript
+var Configger = require("configger"),
+    configger = new Configer({
+        root : "."
+    }),
+    config;
+
+config = configger.run();
+```
 
 ## Development ##
 
