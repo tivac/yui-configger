@@ -12,7 +12,7 @@ describe("yui-configger", function() {
         
         it("should return a config string from run (simple)", function(done) {
             exec(
-                "node bin/cli.js --root=./test/specimens/simple/",
+                "node bin/cli.js --root=./test/specimens/simple/ --silent",
                 function(error, stdout, stderr) {
                     assert.ifError(error);
                     
@@ -28,7 +28,7 @@ describe("yui-configger", function() {
         
         it("should return a config string from run (group-template)", function(done) {
             exec(
-                "node bin/cli.js --root=./test/specimens/group-template/",
+                "node bin/cli.js --root=./test/specimens/group-template/ --silent",
                 function(error, stdout, stderr) {
                     assert.ifError(error);
                     
@@ -44,7 +44,7 @@ describe("yui-configger", function() {
         
         it("should return a config string from run (standard)", function(done) {
             exec(
-                "node bin/cli.js --root=./test/specimens/standard/ -q",
+                "node bin/cli.js --root=./test/specimens/standard/ --silent",
                 function(error, stdout, stderr) {
                     assert.ifError(error);
                     
@@ -60,7 +60,7 @@ describe("yui-configger", function() {
         
         it("should bail if no ast can be generated", function(done) {
             exec(
-                "node bin/cli.js --root=./test/specimens/empty/",
+                "node bin/cli.js --root=./test/specimens/empty/ --silent",
                 function(error, stdout, stderr) {
                     assert(error);
                     

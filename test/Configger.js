@@ -110,8 +110,8 @@ describe("yui-configger", function() {
         
         it("should return a config string from run (simple)", function() {
             var c = new Configger({
-                    root  : "./test/specimens/simple/",
-                    level : "silent"
+                    root   : "./test/specimens/simple/",
+                    silent : true
                 });
             
             assert.equal(
@@ -122,8 +122,8 @@ describe("yui-configger", function() {
         
         it("should return a config string from run (group-template)", function() {
             var c = new Configger({
-                    root  : "./test/specimens/group-template/",
-                    level : "silent"
+                    root   : "./test/specimens/group-template/",
+                    silent : true
                 });
                
             assert.equal(
@@ -134,8 +134,8 @@ describe("yui-configger", function() {
         
         it("should return a config string from run (standard)", function() {
             var c = new Configger({
-                    root  : "./test/specimens/standard/",
-                    level : "silent"
+                    root   : "./test/specimens/standard/",
+                    silent : true
                 });
            
             assert.equal(
@@ -146,8 +146,8 @@ describe("yui-configger", function() {
         
         it("should bail if no ast can be generated", function() {
             var c = new Configger({
-                    root  : "./test/specimens/empty/",
-                    level : "silent"
+                    root   : "./test/specimens/empty/",
+                    silent : true
                 });
                 
             assert.equal(c.run(), undefined);

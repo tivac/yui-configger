@@ -19,13 +19,6 @@
         "type"    : "string"
     },
     
-    "level" : {
-        "alias"   : "l",
-        "desc"    : "Logging level",
-        "default" : "warn",
-        "type"    : "string"
-    },
-    
     "output" : {
         "alias"   : "o",
         "desc"    : "Output file for generated config (defaults to stdout)",
@@ -41,15 +34,23 @@
     
     "tmpl" : {
         "alias"   : "t",
-        "desc"    : "YUI config file to use as template",
+        "desc"    : "YUI config file template",
         "default" : "_config-template.js",
         "type"    : "string"
     },
     
     "verbose" : {
-        "alias"   : "v",
-        "desc"    : "Chatty output",
         "default" : false,
         "type"    : "boolean"
+    },
+
+    "silent" : {
+        "default" : false,
+        "type"    : "boolean"
+    },
+
+    "loglevel" : {
+        "default" : "info",
+        "type"    : "string"
     }
 }
