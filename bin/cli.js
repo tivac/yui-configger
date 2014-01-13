@@ -10,7 +10,7 @@ var fs   = require("fs"),
             .options(require("../args.json"))
             .argv,
 
-    Configger = require("../lib/"),
+    Configger = require("../lib/configger"),
     configger = new Configger(argv),
     output    = configger.run();
 

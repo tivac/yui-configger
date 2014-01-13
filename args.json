@@ -45,6 +45,30 @@
         "default" : "_config-template.js",
         "type"    : "string"
     },
+
+    "css" : {
+        "desc"    : "Generate config values for CSS modules",
+        "default" : false,
+        "type"    : "boolean"
+    },
+
+    "cssprefix" : {
+        "desc"    : "CSS module prefix",
+        "default" : "css-",
+        "type"    : "string"
+    },
+
+    "cssextension" : {
+        "desc"    : "File extension filter for CSS files (regex)",
+        "default" : "^\\.css$",
+        "type"    : "string"
+    },
+
+    "cssfilter" : {
+        "desc"    : "File-name filter for CSS files (regex)",
+        "default" : ".",
+        "type"    : "string"
+    },
     
     "verbose" : {
         "alias"   : "v",
