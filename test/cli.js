@@ -45,6 +45,24 @@ describe("yui-configger", function() {
                 .end(done);
         });
 
+        it("should return a config string from run (mixed, no css)", function(done) {
+            nixt(options)
+                .base(base)
+                .run("--root=./test/specimens/mixed/ --silent ./test/specimens/mixed/")
+                .code(0)
+                .stdout(_file("./test/specimens/mixed/js/_config.js"))
+                .end(done);
+        });
+
+        it("should return a config string from run (mixed, css)", function(done) {
+            nixt(options)
+                .base(base)
+                .run("--root=./test/specimens/mixed/ --css --silent ./test/specimens/mixed/")
+                .code(0)
+                .stdout(_file("./test/specimens/mixed/js/_config-css.js"))
+                .end(done);
+        });
+
         it("should bail if no ast can be generated", function(done) {
             nixt(options)
                 .base(base)
