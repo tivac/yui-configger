@@ -2,16 +2,17 @@
     "root" : {
         "demand"  : true,
         "alias"   : "r",
-        "desc"    : "Root directory to read YUI modules from",
+        "desc"    : "Root path that files will be loaded relative to",
         "type"    : "string"
     },
-    
-    "extension" : {
-        "desc"    : "File extension filter (regex)",
-        "default" : "^\\.js$",
+
+    "extensions" : {
+        "alias"   : "e",
+        "desc"    : "File extensions to parse & include in config",
+        "default" : "js,css",
         "type"    : "string"
     },
-    
+
     "filter" : {
         "alias"   : "f",
         "desc"    : "File-name filter (regex)",
@@ -51,18 +52,6 @@
         "type"    : "string"
     },
 
-    "cssextension" : {
-        "desc"    : "File extension filter for CSS files (regex)",
-        "default" : "^\\.css$",
-        "type"    : "string"
-    },
-
-    "cssfilter" : {
-        "desc"    : "File-name filter for CSS files (regex)",
-        "default" : ".",
-        "type"    : "string"
-    },
-    
     "verbose" : {
         "default" : false,
         "type"    : "boolean"
