@@ -3,6 +3,3 @@
 
 # So NPM publishes from windows don't screw things up
 bin/    text eol=lf
-
-# Force specimens to just LF so tests work
-test/specimens/ text eol=lf
