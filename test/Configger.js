@@ -16,8 +16,7 @@ describe("yui-configger", function() {
     describe("Configger Class", function() {
         it("should load defaults from args.json", function() {
             var c = new Configger({
-                    root : "./test/specimens/simple/",
-                    dirs : [ "./test/specimens/simple/" ]
+                    root : "./test/specimens/simple/"
                 });
             
             assert.equal(c.options.root,            path.normalize("./test/specimens/simple/"));
@@ -26,6 +25,7 @@ describe("yui-configger", function() {
             assert.equal(c.options.filter,          "/./");
             assert.equal(c.options.prefix,          "");
             assert.equal(c.options.cssprefix,       "css-");
+            assert.equal(c.options.loglevel,        "info");
         });
         
         it("shouldn't load defaults when the CLI provided them", function() {
@@ -39,7 +39,7 @@ describe("yui-configger", function() {
                     prefix    : "wooga",
                     verbose   : false,
                     silent    : false,
-                    loglevel  : "info"
+                    loglevel  : "verbose"
                 });
             
             assert.equal(c.options.root,      path.normalize("./test/specimens/simple/"));
@@ -49,11 +49,45 @@ describe("yui-configger", function() {
             assert.equal(c.options.prefix,    "wooga");
             assert.equal(c.options.exts[0],   ".jss");
         });
+
+        it("should respect the loglevel shortcuts", function() {
+            var verbose = new Configger({ root : ".", verbose : true }),
+                silent  = new Configger({ root : ".", silent : true });
+            
+            assert.equal(verbose.options.loglevel, "verbose");
+            assert.equal(silent.options.loglevel,  "silent");
+        });
+
+        it("should always require that a `root` value is set", function() {
+            assert.throws(
+                function() {
+                    var c = new Configger();
+                },
+                Error
+            );
+        });
+
+        it("should ensure that all extensions are prefixed with \".\"", function() {
+            var c = new Configger({
+                    root       : "./test/specimens/simple",
+                    extensions : ".js, css"
+                });
+
+            assert.equal(c.options.exts[0], ".js");
+            assert.equal(c.options.exts[1], ".css");
+        });
+
+        it("should use the root if no search dirs are specified", function() {
+            var c = new Configger({
+                    root : "./test/specimens/simple/"
+                });
+
+            assert.equal(c.options.dirs[0], path.normalize("./test/specimens/simple/"));
+        });
         
         it("should find modules on the file system", function() {
             var c = new Configger({
-                    root : "./test/specimens/simple/",
-                    dirs : [ "./test/specimens/simple/" ]
+                    root : "./test/specimens/simple/"
                 }),
                 modules = c._modules();
             
@@ -62,8 +96,7 @@ describe("yui-configger", function() {
         
         it("should create groups from directories on the file system", function() {
             var c = new Configger({
-                    root : "./test/specimens/simple/",
-                    dirs : [ "./test/specimens/simple/" ]
+                    root : "./test/specimens/simple/"
                 }),
                 groups = c._groups(c._modules());
             
@@ -75,8 +108,7 @@ describe("yui-configger", function() {
         
         it("should find a config template on the file system", function() {
             var c   = new Configger({
-                    root : "./test/specimens/simple/",
-                    dirs : [ "./test/specimens/simple/" ]
+                    root : "./test/specimens/simple/"
                 }),
                 ast = c._config();
             
@@ -86,8 +118,7 @@ describe("yui-configger", function() {
         
         it("should handle not finding a config template on the file system", function() {
             var c = new Configger({
-                    root : "./test/specimens/empty/",
-                    dirs : [ "./test/specimens/empty/" ]
+                    root : "./test/specimens/empty/"
                 });
             
             assert.equal(c._config(), undefined);
@@ -95,8 +126,7 @@ describe("yui-configger", function() {
         
         it("should parse a group template out of the config template", function() {
             var c = new Configger({
-                    root : "./test/specimens/group-template/",
-                    dirs : [ "./test/specimens/group-template/" ]
+                    root : "./test/specimens/group-template/"
                 }),
                 config = c._config(),
                 template;
@@ -113,7 +143,6 @@ describe("yui-configger", function() {
         it("should return a config string from run (simple)", function() {
             var c = new Configger({
                     root   : "./test/specimens/simple/",
-                    dirs   : [ "./test/specimens/simple/" ],
                     silent : true
                 });
             
@@ -126,7 +155,6 @@ describe("yui-configger", function() {
         it("should return a config string from run (group-template)", function() {
             var c = new Configger({
                     root   : "./test/specimens/group-template/",
-                    dirs   : [ "./test/specimens/group-template/" ],
                     silent : true
                 });
                
@@ -139,7 +167,6 @@ describe("yui-configger", function() {
         it("should return a config string from run (standard)", function() {
             var c = new Configger({
                     root   : "./test/specimens/standard/",
-                    dirs   : [ "./test/specimens/standard/" ],
                     silent : true
                 });
            
@@ -169,7 +196,7 @@ describe("yui-configger", function() {
                     silent : true,
                     css    : true
                 });
-           
+            
             assert.equal(
                 c.run(),
                 _file("./test/specimens/mixed/js/_config-css.js")
@@ -179,7 +206,6 @@ describe("yui-configger", function() {
         it("should bail if no ast can be generated", function() {
             var c = new Configger({
                     root   : "./test/specimens/empty/",
-                    dirs   : [ "./test/specimens/empty/" ],
                     silent : true
                 });
                 

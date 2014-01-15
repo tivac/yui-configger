@@ -44,19 +44,6 @@ describe("yui-configger", function() {
             assert.equal(g.modules[0], "module");
         });
         
-        it.skip("shouldn't include modules w/o files", function() {
-            var g = new Group(),
-                modules;
-            
-            g.modules.push(new Module({
-
-            }));
-            
-            modules = g._modulesAST();
-            
-            assert.equal(modules.value.properties.length, 0);
-        });
-        
         it("should generate a brand-new AST", function() {
             var g = new Group({ name : "test" }),
                 ast, aRoot;
