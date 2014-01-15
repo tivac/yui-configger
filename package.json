@@ -2,13 +2,14 @@
   "name": "yui-configger",
   "version": "0.3.0",
   "description": "Extract meta-data from a folder of YUI modules & generate a Loader config",
+  "usage": "Generate a YUI config.\nUsage: $0 --root=[dir] [dir],..,[dirN]",
   "preferGlobal": true,
   "author": "Pat Cavit <pcavit@gmail.com",
   "bugs": "https://github.com/tivac/yui-configger/issues",
   "bin": {
     "configger": "./bin/cli.js"
   },
-  "main": "./lib/index.js",
+  "main": "./lib/configger.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/tivac/yui-configger.git"

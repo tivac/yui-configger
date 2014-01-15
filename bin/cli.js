@@ -3,14 +3,16 @@
 
 "use strict";
 
-var fs   = require("fs"),
-    path = require("path"),
-    argv = require("optimist")
-            .usage("Generate a YUI config.\nUsage: $0 -r [dir]")
-            .options(require("../args.json"))
-            .argv,
+var fs      = require("fs"),
+    path    = require("path"),
 
-    Configger = require("../lib/"),
+    details = require("../package.json"),
+    argv    = require("optimist")
+                .usage(details.usage)
+                .options(require("../args.json"))
+                .argv,
+
+    Configger = require("../lib/configger"),
     configger = new Configger(argv),
     output    = configger.run();
 

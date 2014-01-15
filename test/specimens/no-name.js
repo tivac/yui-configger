@@ -1,0 +1,3 @@
+YUI.add(null, function(){
+    
+});

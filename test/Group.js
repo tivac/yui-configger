@@ -10,6 +10,10 @@ var fs     = require("fs"),
 
 describe("yui-configger", function() {
     describe("Group", function() {
+        it("should be instantiable", function() {
+            new Group();
+        });
+
         it("should store its name", function() {
             var g = new Group({ name : "test" });
             
@@ -40,11 +44,13 @@ describe("yui-configger", function() {
             assert.equal(g.modules[0], "module");
         });
         
-        it("shouldn't include modules w/o files", function() {
+        it.skip("shouldn't include modules w/o files", function() {
             var g = new Group(),
                 modules;
             
-            g.modules.push(new Module());
+            g.modules.push(new Module({
+
+            }));
             
             modules = g._modulesAST();
             
@@ -55,7 +61,10 @@ describe("yui-configger", function() {
             var g = new Group({ name : "test" }),
                 ast, aRoot;
             
-            g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
+            g.modules.push(new Module({
+                file : "./test/specimens/simple/a.js",
+                type : "js"
+            }));
             
             ast = g.ast;
             
@@ -115,7 +124,10 @@ describe("yui-configger", function() {
                 }
             });
             
-            g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
+            g.modules.push(new Module({
+                file : "./test/specimens/simple/a.js",
+                type : "js"
+            }));
             
             ast = g.ast;
             
@@ -149,7 +161,10 @@ describe("yui-configger", function() {
                 existing : require("./specimens/simple/_existing-ast.json")
             });
             
-            g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
+            g.modules.push(new Module({
+                file : "./test/specimens/simple/a.js",
+                type : "js",
+            }));
             
             assert.equal(
                 JSON.stringify(g.ast, null, 4),
@@ -166,7 +181,10 @@ describe("yui-configger", function() {
                 existing : require("./specimens/simple/_existing-ast-literal.json"),
             });
             
-            g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
+            g.modules.push(new Module({
+                file : "./test/specimens/simple/a.js",
+                type : "js",
+            }));
             
             assert.equal(
                 JSON.stringify(g.ast, null, 4),
@@ -220,7 +238,10 @@ describe("yui-configger", function() {
                 }
             });
             
-            g.modules.push(new Module({ file : "./test/specimens/simple/a.js" }));
+            g.modules.push(new Module({
+                file : "./test/specimens/simple/a.js",
+                type : "js",
+            }));
             
             ast = g.ast;
             
