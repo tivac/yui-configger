@@ -19,10 +19,10 @@
     "escodegen": "~1.0.1",
     "estraverse": "~1.5.0",
     "optimist": "0.6.x",
-    "clone": "0.1.x",
     "npmlog": "0.0.x",
     "escape-regexp-component": "1.0.x",
-    "shelljs": "~0.2.6"
+    "shelljs": "~0.2.6",
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "mocha": "~1.17.0",
