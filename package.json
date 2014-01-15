@@ -1,6 +1,6 @@
 {
   "name": "yui-configger",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Extract meta-data from a folder of YUI modules & generate a Loader config",
   "usage": "Generate a YUI config.\nUsage: $0 --root=[dir] [dir],..,[dirN]",
   "preferGlobal": true,
