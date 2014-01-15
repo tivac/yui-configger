@@ -9,7 +9,7 @@ Extract meta-data from a folder of YUI modules & generate a Loader config object
 
 ## Example ##
 
-Let's say you have a folder of YUI modules, looking something like this:
+Let's say you have a folder of YUI modules, something like
 
 ```
 /app
@@ -30,7 +30,7 @@ Let's say you have a folder of YUI modules, looking something like this:
 `-- _config-template.js
 ```
 
-Where each module looks something like this:
+Where each module looks something like
 
 ```javascript
 YUI.add("a.js", function(Y) {
@@ -43,13 +43,13 @@ YUI.add("a.js", function(Y) {
 });
 ```
 
-Running `configger -r /app` will generate a config with a structure like the following
+`configger -root=/app` will generate a config with a structure like
 
 ```javascript
 var config = {
     groups : {
         "main" : {
-            base : "/app/main",
+            base : "/main",
             modules : {
                 "a" : {
                     path : "a.js",
@@ -58,23 +58,65 @@ var config = {
                         "io"
                     ]
                 },
+                "b" : { ... },
+                "c" : { ... }
+            }
+        },
+        "shared" : { ... },
+        "test" : { ... }
+    }
+};
+```
 
-                "b" : {
-                    ...
-                },
+You can also optionally provide a list of search dirs to look for modules in, all paths will be relative to the `root` value. This pairs well with the `--css` flag, which will generate minimal metadata to allow the YUI Loader to load css files as modules for you.
 
-                "c" : {
-                    ...
-                }
+So running `configger --css --root=/app /app/js /app/css` on directories laid out like
+
+```
+/app
+|-- js
+|   |-- main
+|   |   |-- a.js
+|   |   |-- b.js
+|   |   `-- c.js
+|   |
+|   |-- shared
+|   |   |-- d.js
+|   |   |-- e.js
+|   |   `-- f.js
+|   |
+|   `-- _config-template.js
+|
+`-- css
+    |-- a.js
+    `-- b.js
+```
+
+will generate this config structure
+
+```javascript
+var config = {
+    groups : {
+        "/js/main" : {
+            base : "/js/main",
+            modules : {
+                "a" : { ... },
+                "b" : { ... },
+                "c" : { ... }
             }
         },
 
-        "shared" : {
-            ...
-        },
+        "/js/shared" : { ... },
 
-        "test" : {
-            ...
+        "/css" : {
+            base : "/css",
+            modules : {
+                "css-a" : {
+                    type : "css",
+                    path : "a.css"
+                },
+                "css-b" : { ... }
+            }
         }
     }
 };
@@ -89,18 +131,20 @@ var config = {
 ### CLI ###
 
     Generate a YUI config.
-    Usage: yui-configger -r [dir]
-    
+    Usage: node C:\Users\pcavit\Documents\GitHub\yui-configger\bin\cli.js --root=[dir] [dir],..,[dirN]
+
     Options:
-      --root,   -r   Root directory to read YUI modules from                [required]
-      --filter, -f   File-name filter (regex)                               [default: "."]
-      --output, -o   Output file for generated config                       [default: stdout]
-      --prefix, -p   Prefix for group names                                 [default: ""]
-      --tmpl,   -t   YUI config file template                               [default: "_config-template.js"]
-      --extension    File extension filter (regex)                          [default: "^\\.js$"]
-      --loglevel                                                            [default: "info"]
-      --verbose                                                             [default: false]
-      --silent                                                              [default: false]
+      --root, -r        Root path that files will be loaded relative to        [required]
+      --extensions, -e  File extensions to parse & include in config           [default: "js,css"]
+      --filter, -f      File-name filter (regex)                               [string]  [default: "."]
+      --output, -o      Output file for generated config (defaults to stdout)
+      --prefix, -p      Prefix for group names                                 [default: ""]
+      --tmpl, -t        YUI config file template                               [default: "_config-template.js"]
+      --css             Generate config values for CSS modules                 [default: false]
+      --cssprefix       CSS module prefix                                      [default: "css-"]
+      --verbose                                                                [default: false]
+      --silent                                                                 [default: false]
+      --loglevel                                                               [default: "info"]
 
 ### Programmatic ###
 
