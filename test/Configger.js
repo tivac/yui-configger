@@ -4,10 +4,13 @@
 "use strict";
 
 var fs        = require("fs"),
+    os        = require("os"),
     path      = require("path"),
     assert    = require("assert"),
     
-    Configger = require("../lib/configger.js");
+    Configger = require("../lib/configger"),
+
+    _file     = require("./_file");
 
 describe("yui-configger", function() {
     describe("Configger Class", function() {
@@ -115,8 +118,8 @@ describe("yui-configger", function() {
                 });
             
             assert.equal(
-                c.run() + "\n",
-                fs.readFileSync("./test/specimens/simple/_config.js", "utf8")
+                c.run(),
+                _file("./test/specimens/simple/_config.js")
             );
         });
         
@@ -128,8 +131,8 @@ describe("yui-configger", function() {
                 });
                
             assert.equal(
-                c.run() + "\n",
-                fs.readFileSync("./test/specimens/group-template/_config.js", "utf8")
+                c.run(),
+                _file("./test/specimens/group-template/_config.js")
             );
         });
         
@@ -141,8 +144,8 @@ describe("yui-configger", function() {
                 });
            
             assert.equal(
-                c.run() + "\n",
-                fs.readFileSync("./test/specimens/standard/_config.js", "utf8")
+                c.run(),
+                _file("./test/specimens/standard/_config.js")
             );
         });
 
@@ -154,8 +157,8 @@ describe("yui-configger", function() {
                 });
            
             assert.equal(
-                c.run() + "\n",
-                fs.readFileSync("./test/specimens/mixed/js/_config.js", "utf8")
+                c.run(),
+                _file("./test/specimens/mixed/js/_config.js")
             );
         });
 
@@ -168,8 +171,8 @@ describe("yui-configger", function() {
                 });
            
             assert.equal(
-                c.run() + "\n",
-                fs.readFileSync("./test/specimens/mixed/js/_config-css.js", "utf8")
+                c.run(),
+                _file("./test/specimens/mixed/js/_config-css.js")
             );
         });
         

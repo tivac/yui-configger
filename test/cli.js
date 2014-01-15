@@ -4,16 +4,15 @@
 "use strict";
 
 var fs        = require("fs"),
+    
     nixt      = require("nixt"),
+    
+    _file     = require("./_file"),
+
     base      = "node bin/cli.js ",
     options   = {
         newlines : true
-    },
-    _file;
-
-_file = function(file) {
-    return fs.readFileSync(file, "utf8").replace(/\r?\n$/, "");
-};
+    };
 
 describe("yui-configger", function() {
     describe("CLI", function() {
@@ -48,7 +47,7 @@ describe("yui-configger", function() {
         it("should return a config string from run (mixed, no css)", function(done) {
             nixt(options)
                 .base(base)
-                .run("--root=./test/specimens/mixed/ --silent ./test/specimens/mixed/")
+                .run("--root=./test/specimens/mixed/ --silent ./test/specimens/mixed/js")
                 .code(0)
                 .stdout(_file("./test/specimens/mixed/js/_config.js"))
                 .end(done);
@@ -57,7 +56,7 @@ describe("yui-configger", function() {
         it("should return a config string from run (mixed, css)", function(done) {
             nixt(options)
                 .base(base)
-                .run("--root=./test/specimens/mixed/ --css --silent ./test/specimens/mixed/")
+                .run("--root=./test/specimens/mixed/ --css --silent ./test/specimens/mixed/js ./test/specimens/mixed/css")
                 .code(0)
                 .stdout(_file("./test/specimens/mixed/js/_config-css.js"))
                 .end(done);
