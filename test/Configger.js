@@ -19,13 +19,13 @@ describe("yui-configger", function() {
                     root : "./test/specimens/simple/"
                 });
             
-            assert.equal(c.options.root,            path.normalize("./test/specimens/simple/"));
-            assert.equal(c.options.dirs[0],         path.normalize("./test/specimens/simple/"));
-            assert.equal(c.options.tmpl,            "_config-template.js");
-            assert.equal(c.options.filter,          "/./");
-            assert.equal(c.options.prefix,          "");
-            assert.equal(c.options.cssprefix,       "css-");
-            assert.equal(c.options.loglevel,        "info");
+            assert.equal(c.options.root,      path.normalize("./test/specimens/simple/"));
+            assert.equal(c.options.dirs[0],   path.normalize("./test/specimens/simple/"));
+            assert.equal(c.options.tmpl,      "_config-template.js");
+            assert.equal(c.options.filter,    "/./");
+            assert.equal(c.options.prefix,    "");
+            assert.equal(c.options.cssprefix, "css-");
+            assert.equal(c.options.loglevel,  "info");
         });
         
         it("shouldn't load defaults when the CLI provided them", function() {
@@ -88,6 +88,16 @@ describe("yui-configger", function() {
         it("should find modules on the file system", function() {
             var c = new Configger({
                     root : "./test/specimens/simple/"
+                }),
+                modules = c._modules();
+            
+            assert(modules.length);
+        });
+
+        it("should find non-default modules on the file system", function() {
+           var c = new Configger({
+                    root       : "./test/specimens/mixed/",
+                    extensions : "js, css, mjs"
                 }),
                 modules = c._modules();
             
@@ -200,6 +210,19 @@ describe("yui-configger", function() {
             assert.equal(
                 c.run(),
                 _file("./test/specimens/mixed/js/_config-css.js")
+            );
+        });
+
+        it("should return a config string containing user-specified extensions from run (mixed)", function() {
+            var c = new Configger({
+                    root       : "./test/specimens/mixed",
+                    silent     : true,
+                    extensions : "mjs"
+                });
+            
+            assert.equal(
+                c.run(),
+                _file("./test/specimens/mixed/js/_config-mjs.js")
             );
         });
         
