@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "esprima": "1.0.x",
-    "escodegen": "~1.0.1",
+    "escodegen": "~1.2.0",
     "estraverse": "~1.5.0",
     "optimist": "0.6.x",
     "npmlog": "0.0.x",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "mocha": "~1.17.0",
     "istanbul": "~0.2.3",
-    "nixt": "~0.1.0"
+    "nixt": "~0.3.0"
   },
   "scripts": {
     "test": "istanbul test --print both ./node_modules/mocha/bin/_mocha",
