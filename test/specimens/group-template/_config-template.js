@@ -4,6 +4,8 @@ var test_config = {
         $group : {
             base : "{dir}",
             root : "TEST{dir}"
-        }
+        },
+
+        "fake-group" : {}
     }
 };

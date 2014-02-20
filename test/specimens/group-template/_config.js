@@ -29,6 +29,7 @@ var test_config = {
                         requires: ["module-a"]
                     }
                 }
-            }
+            },
+            "fake-group": {}
         }
     };
