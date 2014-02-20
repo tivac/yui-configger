@@ -15,15 +15,15 @@ describe("yui-configger", function() {
         it("should load defaults from args.json", function() {
             var c = new Configger({
                     root : "./test/specimens/simple/"
-                });
+                }),
+                args = require("../args.json");
             
             assert.equal(c.options.root,      path.normalize("./test/specimens/simple/"));
             assert.equal(c.options.dirs[0],   path.normalize("./test/specimens/simple/"));
-            assert.equal(c.options.tmpl,      "_config-template.js");
-            assert.equal(c.options.filter,    "/./");
-            assert.equal(c.options.prefix,    "");
-            assert.equal(c.options.cssprefix, "css-");
-            assert.equal(c.options.loglevel,  "info");
+            assert.equal(c.options.tmpl,      args.tmpl.default);
+            assert.equal(c.options.filter,    "/" + args.filter.default + "/");
+            assert.equal(c.options.prefix,    args.prefix.default);
+            assert.equal(c.options.loglevel,  args.loglevel.default);
         });
         
         it("shouldn't load defaults when the CLI provided them", function() {
@@ -114,40 +114,6 @@ describe("yui-configger", function() {
             assert(groups["/subfolder/"]);
         });
         
-        it("should find a config template on the file system", function() {
-            var c   = new Configger({
-                    root : "./test/specimens/simple/"
-                }),
-                ast = c._config();
-            
-            assert(ast);
-            assert.equal(ast.type, "Program");
-        });
-        
-        it("should handle not finding a config template on the file system", function() {
-            var c = new Configger({
-                    root : "./test/specimens/empty/"
-                });
-            
-            assert.equal(c._config(), undefined);
-        });
-        
-        it("should parse a group template out of the config template", function() {
-            var c = new Configger({
-                    root : "./test/specimens/group-template/"
-                }),
-                config = c._config(),
-                template;
-                
-            assert(config);
-            
-            template = c._template(config);
-            
-            assert(template);
-            assert(template.key);
-            assert.equal(template.key.name, "$group");
-        });
-        
         it("should return a config string from run (simple)", function() {
             var c = new Configger({
                     root   : "./test/specimens/simple/",
@@ -231,6 +197,22 @@ describe("yui-configger", function() {
                 });
                 
             assert.equal(c.run(), undefined);
+        });
+
+        it("should support a custom nameFn", function() {
+            var c = new Configger({
+                    root   : "./test/specimens/name-fn/",
+                    silent : true,
+                    css    : true,
+                    nameFn : function(file, type) {
+                        return "fooga";
+                    }
+                });
+
+            assert.equal(
+                c.run(),
+                _file("./test/specimens/name-fn/_config.js")
+            );
         });
     });
 });

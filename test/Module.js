@@ -60,7 +60,8 @@ describe("yui-configger", function() {
                 }),
                 css = new Module({
                     file : "./test/specimens/mixed/css/a.css",
-                    type : "css"
+                    type : "css",
+                    name : "a"
                 });
             
             assert.equal(js.file, "./test/specimens/simple/a.js");

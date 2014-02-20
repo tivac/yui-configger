@@ -22,7 +22,8 @@
     "npmlog": "0.0.x",
     "escape-regexp-component": "1.0.x",
     "shelljs": "~0.2.6",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "globule": "~0.2.0"
   },
   "devDependencies": {
     "mocha": "~1.17.0",
@@ -35,7 +36,8 @@
     "test": "npm run-script jshint && npm run-script istanbul",
     "jshint": "jshint .",
     "jscs": "jscs -c ./.jscsrc lib/",
-    "istanbul": "istanbul test --print both ./node_modules/mocha/bin/_mocha"
+    "istanbul": "istanbul test --print both ./node_modules/mocha/bin/_mocha",
+    "mocha": "mocha"
   },
   "license": "MIT",
   "engine": {
