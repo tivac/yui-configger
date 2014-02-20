@@ -198,5 +198,21 @@ describe("yui-configger", function() {
                 
             assert.equal(c.run(), undefined);
         });
+
+        it("should support a custom nameFn", function() {
+            var c = new Configger({
+                    root   : "./test/specimens/name-fn/",
+                    silent : true,
+                    css    : true,
+                    nameFn : function(file, type) {
+                        return "fooga";
+                    }
+                });
+
+            assert.equal(
+                c.run(),
+                _file("./test/specimens/name-fn/_config.js")
+            );
+        });
     });
 });
