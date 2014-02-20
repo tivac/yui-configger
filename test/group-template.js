@@ -12,11 +12,11 @@ describe("yui-configger", function() {
         });
         
         it("should find a group template in an AST", function() {
-            var ast = require("./specimens/group-template/ast.js"),
+            var ast = require("./specimens/group-template/_existing-ast.js"),
                 tmpl = group.find(ast);
             
             assert(tmpl);
-            assert.deepEqual(tmpl, require("./specimens/group-template/partial-ast.js"));
+            assert.deepEqual(tmpl, require("./specimens/group-template/_existing-partial-ast.js"));
         });
     });
 });
