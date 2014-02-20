@@ -15,15 +15,15 @@ describe("yui-configger", function() {
         it("should load defaults from args.json", function() {
             var c = new Configger({
                     root : "./test/specimens/simple/"
-                });
+                }),
+                args = require("../args.json");
             
             assert.equal(c.options.root,      path.normalize("./test/specimens/simple/"));
             assert.equal(c.options.dirs[0],   path.normalize("./test/specimens/simple/"));
-            assert.equal(c.options.tmpl,      "_config-template.js");
-            assert.equal(c.options.filter,    "/./");
-            assert.equal(c.options.prefix,    "");
-            assert.equal(c.options.cssprefix, "css-");
-            assert.equal(c.options.loglevel,  "info");
+            assert.equal(c.options.tmpl,      args.tmpl.default);
+            assert.equal(c.options.filter,    "/" + args.filter.default + "/");
+            assert.equal(c.options.prefix,    args.prefix.default);
+            assert.equal(c.options.loglevel,  args.loglevel.default);
         });
         
         it("shouldn't load defaults when the CLI provided them", function() {
@@ -112,24 +112,6 @@ describe("yui-configger", function() {
             assert(Object.keys(groups).length);
             assert(groups["/"]);
             assert(groups["/subfolder/"]);
-        });
-        
-        it("should find a config template on the file system", function() {
-            var c   = new Configger({
-                    root : "./test/specimens/simple/"
-                }),
-                ast = c._config();
-            
-            assert(ast);
-            assert.equal(ast.type, "Program");
-        });
-        
-        it("should handle not finding a config template on the file system", function() {
-            var c = new Configger({
-                    root : "./test/specimens/empty/"
-                });
-            
-            assert.equal(c._config(), undefined);
         });
         
         it("should return a config string from run (simple)", function() {

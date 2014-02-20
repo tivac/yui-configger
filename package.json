@@ -22,7 +22,8 @@
     "npmlog": "0.0.x",
     "escape-regexp-component": "1.0.x",
     "shelljs": "~0.2.6",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "globule": "~0.2.0"
   },
   "devDependencies": {
     "mocha": "~1.17.0",

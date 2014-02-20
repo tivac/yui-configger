@@ -36,7 +36,7 @@
     "tmpl" : {
         "alias"   : "t",
         "desc"    : "YUI config file template",
-        "default" : "_config-template.js",
+        "default" : "**/_config-template.js",
         "type"    : "string"
     },
 
@@ -44,12 +44,6 @@
         "desc"    : "Generate config values for CSS modules",
         "default" : false,
         "type"    : "boolean"
-    },
-
-    "cssprefix" : {
-        "desc"    : "CSS module prefix",
-        "default" : "css-",
-        "type"    : "string"
     },
 
     "verbose" : {
