@@ -3,4 +3,4 @@ node_modules
 temp
 coverage
 output
-test\specimens
+test/specimens
