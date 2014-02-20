@@ -27,12 +27,15 @@
   "devDependencies": {
     "mocha": "~1.17.0",
     "istanbul": "~0.2.3",
-    "nixt": "~0.3.0"
+    "nixt": "~0.3.0",
+    "jshint": "~2.4.3",
+    "jscs": "~1.2.4"
   },
   "scripts": {
-    "test": "istanbul test --print both ./node_modules/mocha/bin/_mocha",
-    "debug": "nodebug ./node_modules/mocha/bin/_mocha",
-    "watch": "supervisor -n \"error|exit\" ./node_modules/mocha/bin/_mocha"
+    "test": "npm run-script jshint && npm run-script istanbul",
+    "jshint": "jshint .",
+    "jscs": "jscs -c ./.jscsrc lib/",
+    "istanbul": "istanbul test --print both ./node_modules/mocha/bin/_mocha"
   },
   "license": "MIT",
   "engine": {

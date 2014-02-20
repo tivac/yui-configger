@@ -3,9 +3,7 @@
 
 "use strict";
 
-var fs        = require("fs"),
-    os        = require("os"),
-    path      = require("path"),
+var path      = require("path"),
     assert    = require("assert"),
     
     Configger = require("../lib/configger"),
@@ -61,7 +59,7 @@ describe("yui-configger", function() {
         it("should always require that a `root` value is set", function() {
             assert.throws(
                 function() {
-                    var c = new Configger();
+                    new Configger();
                 },
                 Error
             );
@@ -95,7 +93,7 @@ describe("yui-configger", function() {
         });
 
         it("should find non-default modules on the file system", function() {
-           var c = new Configger({
+            var c = new Configger({
                     root       : "./test/specimens/mixed/",
                     extensions : "js, css, mjs"
                 }),

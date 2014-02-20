@@ -3,9 +3,7 @@
 
 "use strict";
 
-var fs        = require("fs"),
-    
-    nixt      = require("nixt"),
+var nixt      = require("nixt"),
     
     _file     = require("./_file"),
 

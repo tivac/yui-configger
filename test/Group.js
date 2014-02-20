@@ -3,8 +3,7 @@
 
 "use strict";
 
-var fs     = require("fs"),
-    assert = require("assert"),
+var assert = require("assert"),
     Group  = require("../lib/group.js"),
     Module = require("../lib/module.js");
 

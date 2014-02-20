@@ -1,0 +1,711 @@
+/*jshint node:true */
+
+"use strict";
+
+module.exports = {
+    /*
+        Option: requireCurlyBraces
+        Requires curly braces after statements.
+
+        Valid example:
+
+        if (x) {
+            x++;
+        }
+
+        Invalid example:
+
+        if (x) x++;
+    */
+    "requireCurlyBraces": [
+        "if", "else", "for", "while", "do", "try", "catch", "case", "default"
+    ],
+
+    /*
+        Option: requireSpaceAfterKeywords
+        Requires space after keyword.
+
+        Valid example:
+
+        return true;
+
+        Invalid example:
+
+        if(x) {
+            x++;
+        }
+    */
+    "requireSpaceAfterKeywords": [
+        "return", "try"
+    ],
+
+    /*
+        Option: disallowSpaceAfterKeywords
+        Disallows space after keyword.
+
+        Valid example:
+
+        if(x > y) {
+            y++;
+        }
+    */
+    "disallowSpaceAfterKeywords": [
+        "if", "for", "while", "do", "switch"
+    ],
+
+    /*
+        Option: requireParenthesesAroundIIFE
+        requires parentheses around immediately invoked function expressions.
+
+        Valid example:
+
+        var a = (function(){ return 1; })();
+        var b = (function(){ return 2; }());
+        var c = (function(){ return 3; }).call(this, arg1);
+        var d = (function(){ return 3; }.call(this, arg1));
+        var e = (function(){ return d; }).apply(this, args);
+        var f = (function(){ return d; }.apply(this, args));
+
+        Invalid example:
+
+        var a = function(){ return 1; }();
+        var c = function(){ return 3; }.call(this, arg1);
+        var d = function(){ return d; }.apply(this, args);
+    */
+    "requireParenthesesAroundIIFE": true,
+
+
+    /*
+        Option: requireSpacesInFunctionExpression
+        Requires space before () or {} in function declarations.
+
+        Valid examples:
+        function () {}
+        function a () {}
+
+        Invalid examples:
+        function() {}
+        function (){}
+
+    */
+    "requireSpacesInFunctionExpression": {
+        "beforeOpeningCurlyBrace": true
+    },
+
+    /*
+        Option: disallowSpacesInFunctionExpression
+        Disallows space before () or {} in function declarations.
+
+        Valid examples:
+        function(){}
+        function a(){}
+
+        Invalid examples:
+        function () {}
+        function a (){}
+
+    */
+    "disallowSpacesInFunctionExpression": {
+        "beforeOpeningRoundBrace": true
+    },
+
+    /*
+        Option: requireMultipleVarDecl
+        Requires multiple var declaration.
+
+        Valid example:
+
+        var x = 1,
+            y = 2;
+
+        Invalid example:
+
+        var x = 1;
+        var y = 2;
+    */
+    "requireMultipleVarDecl": true,
+
+    /*
+        Option: disallowEmptyBlocks
+        Disallows empty blocks (except for catch blocks).
+
+        Valid example:
+
+        if ( a == b ) { c = d; }
+        try { a = b; } catch( e ){}
+
+        Invalid example:
+
+        if ( a == b ) { } else { c = d; }
+    */
+    "disallowEmptyBlocks": true,
+
+    /*
+        Option: disallowSpacesInsideParentheses
+        Disallows space after opening round bracket and before closing.
+
+        Valid example:
+
+        var x = (1 + 2) * 3;
+
+        Invalid example:
+
+        var x = ( 1 + 2 ) * 3;
+    */
+    "disallowSpacesInsideParentheses": true,
+
+    /*
+        Option: requireSpacesInsideObjectBrackets
+        Possible values: "all" for strict mode, "allButNested" ignores closing brackets in a row.
+        Requires space after opening object curly brace and before closing.
+
+        Valid example for mode "all":
+
+        var x = { a: { b: 1 } };
+
+        Valid example for mode "allButNested":
+
+        var x = { a: { b: 1 }};
+
+        Invalid example:
+
+        var x = {a: 1};
+    */
+    "requireSpacesInsideObjectBrackets": "allButNested",
+
+    /*
+        Option: requireSpacesInsideArrayBrackets
+        Possible values: "all" for strict mode, "allButNested" ignores closing brackets in a row.
+        Requires space after opening array square bracket and before closing.
+
+        Valid example for mode "all":
+
+        var x = [ 1 ];
+
+        Valid example for mode "allButNested":
+
+        var x = [[ 1 ], [ 2 ]];
+
+        Invalid example:
+
+        var x = [1];
+    */
+    "requireSpacesInsideArrayBrackets": "allButNested",
+
+    /*
+        Option: disallowQuotedKeysInObjects
+        Possible values:
+            `true`: for strict mode,
+            "allButReserved" allows ES3+ reserved words to remain quoted. This is helpfull when using this option with JSHint's `es3` option.
+        Disallows quoted keys in object if possible.
+
+        Valid example for mode true:
+
+        var x = { a: { default: 1 } };
+
+        Valid example for mode "allButReserved":
+
+        var x = {a: 1, 'default': 2};
+
+        Invalid example:
+
+        var x = {'a': 1};
+    */
+    "disallowQuotedKeysInObjects": "allButReserved",
+
+    /*
+        Option: requireSpaceAfterObjectKeys
+        Requires space after object keys.
+
+        Valid example:
+
+        var x = {a : 1};
+
+        Invalid example:
+
+        var x = {a: 1};
+    */
+    "requireSpaceAfterObjectKeys": true,
+
+    /*
+        Option: requireCommaBeforeLineBreak
+        requires commas as last token on a line in lists.
+
+        Valid example:
+
+        var x = {
+            one: 1,
+            two: 2
+        };
+        var y = { three: 3, four: 4};
+
+        Invalid example:
+
+        var x = {
+            one: 1
+            , two: 2
+        };
+    */
+    "requireCommaBeforeLineBreak": true,
+
+    /*
+        Option: requireAlignedObjectValues
+        Possible values:
+            "all" for strict mode,
+            "skipWithFunction" ignores objects if one of the property values is a function expression,
+            "skipWithLineBreak" ignores objects if there are line breaks between properties
+        Requires proper alignment in object literals.
+
+        Valid example:
+
+        var x = {
+            a   : 1,
+            bcd : 2,
+            ef  : 'str'
+        };
+
+        Invalid example:
+
+        var x = {
+            a : 1,
+            bcd : 2,
+            ef : 'str'
+        };
+    */
+    "requireAlignedObjectValues": "skipWithFunction",
+
+    /*
+        Option: requireOperatorBeforeLineBreak
+        requires operators to appear before line breaks and not after.
+
+        Valid example:
+
+        x = y ? 1 : 2;
+        x = y ?
+            1 : 2;
+
+        Invalid example:
+
+        x = y
+            ? 1 : 2;
+    */
+    "requireOperatorBeforeLineBreak": [
+        "?", "+", "-", "/", "*", "=","==", "===", "!=", "!==", ">", ">=", "<", "<=", ","
+    ],
+
+    /*
+        Option: disallowLeftStickedOperators
+        Disallows sticking operators to the left.
+
+        Valid example:
+
+        x = y ? 1 : 2;
+
+        Invalid example:
+
+        x = y? 1 : 2;
+    */
+    "disallowLeftStickedOperators": [
+        "?", "+", "/", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="
+    ],
+
+    /*
+        Option: requireRightStickedOperators
+        Requires sticking operators to the right.
+
+        Valid example:
+
+        x = !y;
+
+        Invalid example:
+
+        x = ! y;
+    */
+    "requireRightStickedOperators": [
+        "!"
+    ],
+
+    /*
+        Option: disallowRightStickedOperators
+        Disallows sticking operators to the right.
+
+        Valid example:
+
+        x = y + 1;
+
+        Invalid example:
+
+        x = y +1;
+    */
+    "disallowRightStickedOperators": [
+        "?", "+", "/", "*", ":", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="
+    ],
+
+    /*
+        Option: requireLeftStickedOperators
+        Requires sticking operators to the left.
+
+        Valid example:
+
+        x = [1, 2];
+
+        Invalid example:
+
+        x = [1 , 2];
+    */
+    "requireLeftStickedOperators": [
+        ","
+    ],
+
+    /*
+        Option: disallowSpaceAfterPrefixUnaryOperators
+        Requires sticking unary operators to the right.
+
+        Valid example:
+
+        x = !y; y = ++z;
+
+        Invalid example:
+
+        x = ! y; y = ++ z;
+    */
+    "disallowSpaceAfterPrefixUnaryOperators": [
+        "++", "--", "+", "-", "~", "!"
+    ],
+
+    /*
+        Option: requireSpaceAfterPrefixUnaryOperators
+        Disallows sticking unary operators to the right.
+
+        Valid example:
+
+        x = ! y; y = ++ z;
+
+        Invalid example:
+
+        x = !y; y = ++z;
+    */
+    "requireSpaceAfterPrefixUnaryOperators": [],
+
+    /*
+        Option: disallowSpaceBeforePostfixUnaryOperators
+        Requires sticking unary operators to the left.
+
+        Valid example:
+
+        x = y++; y = z--;
+
+        Invalid example:
+
+        x = y ++; y = z --;
+    */
+    "disallowSpaceBeforePostfixUnaryOperators": [
+        "++", "--"
+    ],
+
+    /*
+        Option: requireSpaceBeforePostfixUnaryOperators
+        Disallows sticking unary operators to the left.
+
+        Valid example:
+
+        x = y ++; y = z --;
+
+        Invalid example:
+
+        x = y++; y = z--;
+    */
+    "requireSpaceBeforePostfixUnaryOperators": [],
+
+    /*
+        Option: disallowSpaceBeforeBinaryOperators
+        Requires sticking binary operators to the left.
+
+        Valid example:
+
+        x+ y;
+
+        Invalid example:
+
+        x + y;
+    */
+    "disallowSpaceBeforeBinaryOperators": [],
+
+    /*
+        Option: requireSpaceBeforeBinaryOperators
+        Disallows sticking binary operators to the left.
+
+        Valid example:
+
+        x !== y;
+
+        Invalid example:
+
+        x!== y;
+    */
+    "requireSpaceBeforeBinaryOperators": [
+        "+", "-", "/", "*", "=", "==", "===", "!=", "!=="
+    ],
+
+    /*
+        Option: disallowSpaceAfterBinaryOperators
+        Requires sticking binary operators to the right.
+
+        Valid example:
+
+        x +y;
+
+        Invalid example:
+
+        x+ y;
+    */
+    "disallowSpaceAfterBinaryOperators": [],
+
+    /*
+        Option: requireSpaceAfterBinaryOperators
+        Disallows sticking binary operators to the right.
+
+        Valid example:
+
+        x + y;
+
+        Invalid example:
+
+        x +y;
+    */
+    "requireSpaceAfterBinaryOperators": [
+        "+", "-", "/", "*", "=", "==", "===", "!=", "!=="
+    ],
+
+    /*
+        Option: disallowImplicitTypeConversion
+        Disallows implicit type conversion.
+
+        Valid example:
+
+        x = Boolean(y);
+        x = Number(y);
+        x = String(y);
+        x = s.indexOf('.') !== -1;
+
+        Invalid example:
+
+        x = !!y;
+        x = +y;
+        x = '' + y;
+        x = ~s.indexOf('.');
+    */
+    "disallowImplicitTypeConversion": [],
+
+    /*
+        Option: requireCamelCaseOrUpperCaseIdentifiers
+        Requires identifiers to be camelCased or UPPERCASE_WITH_UNDERSCORES
+
+        Valid example:
+
+        var camelCase = 0;
+        var CamelCase = 1;
+        var _camelCase = 2;
+        var camelCase_ = 3;
+        var UPPER_CASE = 4;
+
+        Invalid examples:
+
+        var lower_case = 1;
+        var Mixed_case = 2;
+        var mixed_Case = 3;
+    */
+    "requireCamelCaseOrUpperCaseIdentifiers": true,
+
+    /*
+        Option: disallowKeywords
+        Disallows usage of specified keywords.
+
+        Invalid example:
+
+        with (x) {
+            prop++;
+        }
+    */
+    "disallowKeywords": [ "with" ],
+
+    /*
+        Option: disallowMultipleLineBreaks
+        Disallows multiple blank lines in a row.
+
+        Invalid example:
+
+        var x = 1;
+
+
+        x++;
+    */
+    "disallowMultipleLineBreaks": true,
+
+    /*
+        Option: validateQuoteMarks
+        Possible values: "\"", "'", true
+        Requires all quote marks to be either the supplied value, or consistent if "true"
+
+        Valid example for mode "\"" or mode "true":
+
+        var x = "x";
+
+        Valid example for mode "'" or mode "true":
+
+        var x = 'x';
+
+        Invalid example for mode "true":
+
+        var x = "x", y = 'y';
+    */
+    "validateQuoteMarks": "\"",
+
+    /*
+        Option: disallowMixedSpacesAndTabs
+        Possible values: true, "smart"
+        requires lines to not contain both spaces and tabs consecutively,
+        or spaces after tabs only for alignment if "smart"
+    */
+    "disallowMixedSpacesAndTabs": true,
+
+    /*
+        Option: disallowKeywordsOnNewLine
+        Disallows placing keywords on a new line.
+
+        Valid example:
+
+        if (x < 0) {
+            x++;
+        } else {
+            x--;
+        }
+
+        Invalid example:
+
+        if (x < 0) {
+            x++;
+        }
+        else {
+            x--;
+        }
+    */
+    "disallowKeywordsOnNewLine": [
+        "else"
+    ],
+
+    /*
+        Option: requireKeywordsOnNewLine
+        Requires placing keywords on a new line.
+
+        Valid example:
+
+        if (x < 0) {
+            x++;
+        }
+        else {
+            x--;
+        }
+
+        Invalid example:
+
+        if (x < 0) {
+            x++;
+        } else {
+            x--;
+        }
+    */
+    "requireKeywordsOnNewLine": [],
+
+    /*
+        Option: requireLineFeedAtFileEnd
+        Requires placing line feed at file end.
+    */
+    "requireLineFeedAtFileEnd": true,
+
+    /*
+        Option: maximumLineLength
+        Requires all lines to be at most the number of characters specified
+    */
+    "maximumLineLength": 120,
+
+    /*
+        Option: requireCapitalizedConstructors
+        Requires constructors to be capitalized (except for "this")
+
+        Valid example:
+
+        var a = new B();
+        var c = new this();
+
+        Invalid example:
+
+        var d = new e();
+    */
+    "requireCapitalizedConstructors": true,
+
+    /*
+        Option: safeContextKeyword
+        Option to check "var that = this" expressions
+
+        Valid example:
+
+        var that = this;
+
+        Invalid example:
+
+        var _this = this;
+    */
+    "safeContextKeyword": "self",
+
+    /*
+        Option: requireDotNotation
+        requires member expressions to use dot notation when possible
+
+        Valid example:
+
+        var a = b[c];
+        var a = b.c;
+        var a = b[c.d];
+        var a = b['while']; //reserved word
+
+        Invalid example:
+
+        var a = b['c'];
+    */
+    "requireDotNotation": true,
+
+    /*
+        Option: validateJSDoc
+        Enables jsdoc validation.
+
+        Option: validateJSDoc.checkParamNames
+        Ensures param names in jsdoc and in function declaration are equal.
+
+        Option: validateJSDoc.requireParamTypes
+        Ensures params in jsdoc contains type.
+
+        Option: validateJSDoc.checkRedundantParams
+        Reports redundant params in jsdoc.
+    */
+    "validateJSDoc": {
+        "checkParamNames"      : true,
+        "checkRedundantParams" : true,
+        "requireParamTypes"    : true
+    },
+
+    /*
+        Option: excludeFiles
+        Disables style checking for specified paths.
+    */
+    "excludeFiles": [
+        "node_modules/**",
+        "coverage/**"
+    ],
+
+    /*
+        Option: additionalRules
+        Pluggable rules
+    */
+    "additionalRules": []
+};
