@@ -28,6 +28,18 @@ describe("yui-configger", function() {
             assert.equal(g.name, "atest");
         });
         
+        it("should provide getters", function() {
+            var g = new Group({
+                    name : "test",
+                    prefix : "a",
+                    template : "fooga",
+                    existing : "booga"
+                });
+            
+            assert.equal(g.template, "fooga");
+            assert.equal(g.existing, "booga");
+        });
+        
         it("should start out with no modules", function() {
             var g = new Group({ name : "test" });
             
