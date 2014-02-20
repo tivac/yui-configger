@@ -35,7 +35,8 @@
     "test": "npm run-script jshint && npm run-script istanbul",
     "jshint": "jshint .",
     "jscs": "jscs -c ./.jscsrc lib/",
-    "istanbul": "istanbul test --print both ./node_modules/mocha/bin/_mocha"
+    "istanbul": "istanbul test --print both ./node_modules/mocha/bin/_mocha",
+    "mocha": "mocha"
   },
   "license": "MIT",
   "engine": {

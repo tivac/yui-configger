@@ -132,22 +132,6 @@ describe("yui-configger", function() {
             assert.equal(c._config(), undefined);
         });
         
-        it("should parse a group template out of the config template", function() {
-            var c = new Configger({
-                    root : "./test/specimens/group-template/"
-                }),
-                config = c._config(),
-                template;
-                
-            assert(config);
-            
-            template = c._template(config);
-            
-            assert(template);
-            assert(template.key);
-            assert.equal(template.key.name, "$group");
-        });
-        
         it("should return a config string from run (simple)", function() {
             var c = new Configger({
                     root   : "./test/specimens/simple/",
