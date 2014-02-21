@@ -199,6 +199,18 @@ describe("yui-configger", function() {
             assert.equal(c.run(), undefined);
         });
 
+        it("should bail if the config template doesn't have a groups property", function() {
+            var c = new Configger({
+                    root   : "./test/specimens/mixed",
+                    silent : true
+                }),
+                ast = require("./specimens/invalid-template.ast.json");
+
+            assert.throws(function() {
+                c._insertGroups(ast);
+            });
+        });
+
         it("should support a custom nameFn", function() {
             var c = new Configger({
                     root   : "./test/specimens/name-fn/",

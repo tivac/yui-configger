@@ -1,5 +1,13 @@
 var test_config = {
         groups: {
+            "/subfolder-b/sub-subfolder/": {
+                base: "/subfolder-b/sub-subfolder/",
+                modules: { "module-j": { path: "j.js" } }
+            },
+            "/subfolder-b/sub-subfolder/sub-sub-subfolder/": {
+                base: "/subfolder-b/sub-subfolder/sub-sub-subfolder/",
+                modules: { "module-k": { path: "k.js" } }
+            },
             "/": {
                 comboBase: "/combo/_",
                 root: "/",
@@ -100,14 +108,6 @@ var test_config = {
                     }
                 }
             },
-            "test-subfolder": { modules: "configger" },
-            "/subfolder-b/sub-subfolder/": {
-                base: "/subfolder-b/sub-subfolder/",
-                modules: { "module-j": { path: "j.js" } }
-            },
-            "/subfolder-b/sub-subfolder/sub-sub-subfolder/": {
-                base: "/subfolder-b/sub-subfolder/sub-sub-subfolder/",
-                modules: { "module-k": { path: "k.js" } }
-            }
+            "test-subfolder": { modules: "configger" }
         }
     };
