@@ -85,8 +85,8 @@ describe("yui-configger", function() {
                     type : "css"
                 });
 
-            assert(js.valid);
-            assert(css.valid);
+            assert(js.valid());
+            assert(css.valid());
         });
 
         it("should not generate config if passed an invalid file", function() {
@@ -123,6 +123,15 @@ describe("yui-configger", function() {
                 });
             
             assert.equal(m.config, undefined);
+        });
+
+        it("should not be valid if an AST cannot be created", function() {
+            var m = new Module({
+                    file : "./test/specimens/invalid.js",
+                    type : "js"
+                });
+
+            assert(!m.valid());
         });
         
         it("should use a default module config if one isn't defined", function() {
