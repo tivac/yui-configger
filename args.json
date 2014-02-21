@@ -1,22 +1,25 @@
 {
-    "root" : {
-        "demand"  : true,
-        "alias"   : "r",
-        "desc"    : "Root path that files will be loaded relative to",
+    "cssextensions" : {
+        "desc"    : "CSS file extensions (comma-separated)",
+        "default" : "css",
         "type"    : "string"
     },
 
-    "extensions" : {
-        "alias"   : "e",
-        "desc"    : "File extensions to parse & include in config",
-        "default" : "js,css",
-        "type"    : "string"
+    "css" : {
+        "alias"   : "f",
+        "desc"    : "Generate config values for CSS modules",
+        "default" : false,
+        "type"    : "boolean"
     },
 
     "filter" : {
         "alias"   : "f",
-        "desc"    : "File-name filter (regex)",
-        "default" : ".",
+        "desc"    : "File-name filter (glob)"
+    },
+
+    "jsextensions" : {
+        "desc"    : "JavaScript file extensions (comma-separated)",
+        "default" : "js",
         "type"    : "string"
     },
     
@@ -32,6 +35,13 @@
         "default" : "",
         "type"    : "string"
     },
+
+    "root" : {
+        "alias"   : "r",
+        "desc"    : "Root path that files will be loaded relative to",
+        "type"    : "string",
+        "default" : "."
+    },
     
     "tmpl" : {
         "alias"   : "t",
@@ -40,13 +50,8 @@
         "type"    : "string"
     },
 
-    "css" : {
-        "desc"    : "Generate config values for CSS modules",
-        "default" : false,
-        "type"    : "boolean"
-    },
-
     "verbose" : {
+        "alias"   : "v",
         "default" : false,
         "type"    : "boolean"
     },

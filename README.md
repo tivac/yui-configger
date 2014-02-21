@@ -5,11 +5,11 @@ yui-configger
 [![Dependency Status](https://david-dm.org/tivac/yui-configger.png?theme=shields.io)](https://david-dm.org/tivac/yui-configger)
 [![devDependency Status](https://david-dm.org/tivac/yui-configger/dev-status.png?theme=shields.io)](https://david-dm.org/tivac/yui-configger#info=devDependencies)
 
-Extract meta-data from a folder of YUI modules & generate a Loader config object. Writing out a config file by hand sucks, so let's automate the process!
+Extract meta-data from a folder of YUI modules/CSS files & generate a Loader config object. Writing out a config file by hand sucks, so let's automate the process!
 
 ## Example ##
 
-Let's say you have a folder of YUI modules, something like
+Let's say you have a folder of files (mostly YUI modules), something like
 
 ```
 /app
@@ -43,7 +43,7 @@ YUI.add("a.js", function(Y) {
 });
 ```
 
-`configger -root=/app` will generate a config with a structure like
+Running `configger` in the `/app` dir will generate this config:
 
 ```javascript
 var config = {
@@ -92,7 +92,7 @@ So running `configger --css --root=/app /app/js /app/css` on directories laid ou
     `-- b.js
 ```
 
-will generate this config structure
+will generate this config
 
 ```javascript
 var config = {
@@ -131,20 +131,20 @@ var config = {
 ### CLI ###
 
     Generate a YUI config.
-    Usage: node C:\Users\pcavit\Documents\GitHub\yui-configger\bin\cli.js --root=[dir] [dir],..,[dirN]
+    Usage: yui-configger --root=[dir] [dir],..,[dirN]
 
     Options:
-      --root, -r        Root path that files will be loaded relative to        [required]
-      --extensions, -e  File extensions to parse & include in config           [default: "js,css"]
-      --filter, -f      File-name filter (regex)                               [string]  [default: "."]
-      --output, -o      Output file for generated config (defaults to stdout)
-      --prefix, -p      Prefix for group names                                 [default: ""]
-      --tmpl, -t        YUI config file template                               [default: "_config-template.js"]
-      --css             Generate config values for CSS modules                 [default: false]
-      --cssprefix       CSS module prefix                                      [default: "css-"]
-      --verbose                                                                [default: false]
-      --silent                                                                 [default: false]
-      --loglevel                                                               [default: "info"]
+      --cssextensions  CSS file extensions (comma-separated)                  [default: "css"]
+      --css, -f        Generate config values for CSS modules                 [default: false]
+      --filter, -f     File-name filter (glob)                                [string]  [default: undefined]
+      --jsextensions   JavaScript file extensions (comma-separated)           [default: "js"]
+      --output, -o     Output file for generated config (defaults to stdout)
+      --prefix, -p     Prefix for group names                                 [default: ""]
+      --root, -r       Root path that files will be loaded relative to        [default: "."]
+      --tmpl, -t       YUI config file template                               [default: "**/_config-template.js"]
+      --verbose, -v                                                           [default: false]
+      --silent                                                                [default: false]
+      --loglevel                                                              [default: "info"]
 
 ### Programmatic ###
 
@@ -156,6 +156,25 @@ var Configger = require("configger"),
     config;
 
 config = configger.run();
+```
+
+From the programmatic API you may also define a `nameFn` that will be invoked to determine the name of all non-YUI modules. The default `nameFn` will do the following for CSS files.
+
+`fooga.css` will have a module name of `css-fooga`.
+
+The default implementation provides a good overview of the arguments passed.
+
+```javascript
+// Default naming function for modules
+_nameFn : function(file, type) {
+    var name = path.basename(file, path.extname(file));
+
+    if(type !== "css") {
+        return name;
+    }
+
+    return "css-" + name;
+},
 ```
 
 ## Development ##

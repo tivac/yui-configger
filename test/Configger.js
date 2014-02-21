@@ -13,66 +13,74 @@ var path      = require("path"),
 describe("yui-configger", function() {
     describe("Configger Class", function() {
         it("should load defaults from args.json", function() {
-            var c = new Configger({
-                    root : "./test/specimens/simple/"
-                }),
+            var c = new Configger(),
                 args = require("../args.json");
             
-            assert.equal(c.options.root,      path.normalize("./test/specimens/simple/"));
-            assert.equal(c.options.dirs[0],   path.normalize("./test/specimens/simple/"));
+            assert.equal(c.options.root,      path.normalize("."));
+            assert.equal(c.options.dirs[0],   path.normalize("."));
             assert.equal(c.options.tmpl,      args.tmpl.default);
-            assert.equal(c.options.filter,    "/" + args.filter.default + "/");
             assert.equal(c.options.prefix,    args.prefix.default);
             assert.equal(c.options.loglevel,  args.loglevel.default);
+            assert.deepEqual(
+                c.options.extensions,
+                {
+                    js  : [ "**/*.js" ],
+                    css : [ "**/*.css" ]
+                }
+            );
+            assert.equal(c.options.nameFn,   c._nameFn);
         });
         
         it("shouldn't load defaults when the CLI provided them", function() {
             var c = new Configger({
-                    "$0"      : true,
-                    root      : "./test/specimens/simple/",
-                    _         : [ "./test/specimens/simple/" ],
-                    extensions: "jss,css",
-                    tmpl      : "_config-template.js",
-                    filter    : "fooga.js",
-                    prefix    : "wooga",
-                    verbose   : false,
-                    silent    : false,
-                    loglevel  : "verbose"
+                    "$0"          : true,
+                    root          : "./test/specimens/simple/",
+                    _             : [ "./test/specimens/simple/" ],
+                    jsextensions  : ".jss",
+                    cssextensions : "ccs",
+                    tmpl          : "_config-tmpl.js",
+                    filter        : "fooga.js",
+                    prefix        : "wooga",
+                    verbose       : false,
+                    silent        : false,
+                    loglevel      : "verbose"
                 });
             
             assert.equal(c.options.root,      path.normalize("./test/specimens/simple/"));
             assert.equal(c.options.dirs[0],   path.normalize("./test/specimens/simple/"));
-            assert.equal(c.options.tmpl,      "_config-template.js");
-            assert.equal(c.options.filter,    "/fooga.js/");
+            assert.equal(c.options.tmpl,      "_config-tmpl.js");
+            assert.equal(c.options.filter,    "fooga.js");
             assert.equal(c.options.prefix,    "wooga");
-            assert.equal(c.options.exts[0],   ".jss");
+            assert.deepEqual(
+                c.options.extensions,
+                {
+                    js  : [ "**/*.jss" ],
+                    css : [ "**/*.ccs" ]
+                }
+            );
         });
 
         it("should respect the loglevel shortcuts", function() {
-            var verbose = new Configger({ root : ".", verbose : true }),
-                silent  = new Configger({ root : ".", silent : true });
+            var verbose = new Configger({ verbose : true }),
+                silent  = new Configger({ silent  : true });
             
             assert.equal(verbose.options.loglevel, "verbose");
             assert.equal(silent.options.loglevel,  "silent");
         });
 
-        it("should always require that a `root` value is set", function() {
-            assert.throws(
-                function() {
-                    new Configger();
-                },
-                Error
-            );
-        });
-
         it("should ensure that all extensions are prefixed with \".\"", function() {
             var c = new Configger({
-                    root       : "./test/specimens/simple",
-                    extensions : ".js, css"
+                    jsextensions  : "jss",
+                    cssextensions : "ccs"
                 });
 
-            assert.equal(c.options.exts[0], ".js");
-            assert.equal(c.options.exts[1], ".css");
+            assert.deepEqual(
+                c.options.extensions,
+                {
+                    js  : [ "**/*.jss" ],
+                    css : [ "**/*.ccs" ]
+                }
+            );
         });
 
         it("should use the root if no search dirs are specified", function() {
@@ -94,12 +102,38 @@ describe("yui-configger", function() {
 
         it("should find non-default modules on the file system", function() {
             var c = new Configger({
-                    root       : "./test/specimens/mixed/",
-                    extensions : "js, css, mjs"
+                    root         : "./test/specimens/mixed/",
+                    jsextensions : "js, mjs"
                 }),
                 modules = c._modules();
             
             assert(modules.length);
+            assert(modules[0].file.indexOf(path.join("js/a.js")) > -1);
+            assert(modules[3].file.indexOf(path.join("templates/a.mjs")) > -1);
+        });
+
+        it("should only find modules matching the filter", function() {
+            var c = new Configger({
+                    root   : "./test/specimens/mixed/",
+                    filter : "**/a.js"
+                }),
+                modules = c._modules();
+            
+            assert(modules.length === 1);
+            assert(modules[0].file.indexOf(path.join("js/a.js")) > -1);
+        });
+
+        it("should exclude the output file from the list of modules", function() {
+                var c = new Configger({
+                    root   : "./test/specimens/group-template/",
+                    output : "a.js"
+                }),
+                modules = c._modules();
+            
+            assert(modules.length);
+            modules.forEach(function(module) {
+                assert(module.file.indexOf(path.join("js/a.js")) === -1);
+            });
         });
         
         it("should create groups from directories on the file system", function() {
@@ -179,9 +213,9 @@ describe("yui-configger", function() {
 
         it("should return a config string containing user-specified extensions from run (mixed)", function() {
             var c = new Configger({
-                    root       : "./test/specimens/mixed",
-                    silent     : true,
-                    extensions : "mjs"
+                    root         : "./test/specimens/mixed",
+                    silent       : true,
+                    jsextensions : "mjs"
                 });
             
             assert.equal(

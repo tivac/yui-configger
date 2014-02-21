@@ -701,6 +701,7 @@ module.exports = {
     "excludeFiles": [
         "node_modules/**",
         "coverage/**"
+        "test/specimens/**"
     ],
 
     /*
