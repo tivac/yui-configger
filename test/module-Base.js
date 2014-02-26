@@ -7,7 +7,7 @@ var fs     = require("fs"),
     BaseModule = require("../lib/modules/base");
 
 describe("yui-configger", function() {
-    describe.only("Base Module Class", function() {
+    describe("Base Module Class", function() {
         it("should instantiate", function() {
             new BaseModule({
                 file : "./test/specimens/simple/a.js"
@@ -47,7 +47,7 @@ describe("yui-configger", function() {
             assert.equal(base.name, "base-a");
 
             assert.throws(function() {
-                base.config;
+                var config = base.config;
             });
 
             base._config = "fooga";
