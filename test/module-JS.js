@@ -4,7 +4,7 @@
 "use strict";
 
 var assert = require("assert"),
-    Module = require("../lib/module.js");
+    Module = require("../lib/modules/js");
 
 describe("yui-configger", function() {
     describe("Module Class", function() {

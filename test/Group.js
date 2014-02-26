@@ -5,7 +5,7 @@
 
 var assert = require("assert"),
     Group  = require("../lib/group.js"),
-    Module = require("../lib/module.js");
+    Module = require("../lib/modules/base");
 
 describe("yui-configger", function() {
     describe("Group", function() {
