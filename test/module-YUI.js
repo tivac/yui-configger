@@ -16,7 +16,7 @@ describe("yui-configger", function() {
 
         it("should not allow invalid code", function() {
             assert.throws(function() {
-                YUIModule({
+                new YUIModule({
                     file : "./test/specimens/invalid.js"
                 });
             });
