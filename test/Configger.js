@@ -12,9 +12,9 @@ var path      = require("path"),
 
 describe("yui-configger", function() {
     describe("Configger Class", function() {
-        it("should load defaults from args.json", function() {
+        it("should load defaults from args.js", function() {
             var c = new Configger(),
-                args = require("../args.json");
+                args = require("../args.js");
             
             assert.equal(c.options.root,      path.normalize("."));
             assert.equal(c.options.dirs[0],   path.normalize("."));
@@ -108,8 +108,12 @@ describe("yui-configger", function() {
                 modules = c._modules();
             
             assert(modules.length);
-            assert(modules[0].file.indexOf(path.join("js/a.js")) > -1);
-            assert(modules[3].file.indexOf(path.join("templates/a.mjs")) > -1);
+            assert(modules.some(function(module) {
+                return module.file.indexOf(path.join("js/a.js")) > -1;
+            }));
+            assert(modules.some(function(module) {
+                return module.file.indexOf(path.join("templates/a.mjs")) > -1;
+            }));
         });
 
         it("should only find modules matching the filter", function() {
@@ -258,6 +262,19 @@ describe("yui-configger", function() {
             assert.equal(
                 c.run(),
                 _file("./test/specimens/name-fn/_config.js")
+            );
+        });
+
+        it("should support bare JS modules", function() {
+            var c = new Configger({
+                    root   : "./test/specimens/bare-js/",
+                    silent : true,
+                    js     : true
+                });
+
+            assert.equal(
+                c.run(),
+                _file("./test/specimens/bare-js/_config.config")
             );
         });
     });
