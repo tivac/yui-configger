@@ -43,16 +43,9 @@ describe("yui-configger", function() {
                     name : "base-a"
                 });
             
-            assert.equal(base.file, "./test/specimens/simple/a.js");
-            assert.equal(base.name, "base-a");
-
-            assert.throws(function() {
-                var config = base.config;
-            });
-
-            base._config = "fooga";
-
-            assert(base.config === "fooga");
+            assert(base.file   === "./test/specimens/simple/a.js");
+            assert(base.name   === "base-a");
+            assert(base.config === undefined);
         });
 
         it("should provide a `valid` function to check validity", function() {
