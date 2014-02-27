@@ -3,12 +3,12 @@
 
 "use strict";
 
-var assert = require("assert"),
-    Group  = require("../lib/group.js"),
-    Module = require("../lib/modules/base");
+var assert    = require("assert"),
+    Group     = require("../lib/group.js"),
+    YUIModule = require("../lib/modules/yui");
 
 describe("yui-configger", function() {
-    describe("Group", function() {
+    describe("Group Class", function() {
         it("should be instantiable", function() {
             new Group();
         });
@@ -21,20 +21,20 @@ describe("yui-configger", function() {
         
         it("should use the prefix for the name", function() {
             var g = new Group({
-                    name : "test",
-                    prefix : "a"
-                });
+                        name : "test",
+                        prefix : "a"
+                    });
             
             assert.equal(g.name, "atest");
         });
         
         it("should provide getters", function() {
             var g = new Group({
-                    name : "test",
-                    prefix : "a",
-                    template : "fooga",
-                    existing : "booga"
-                });
+                        name : "test",
+                        prefix : "a",
+                        template : "fooga",
+                        existing : "booga"
+                    });
             
             assert.equal(g.template, "fooga");
             assert.equal(g.existing, "booga");
@@ -59,9 +59,8 @@ describe("yui-configger", function() {
             var g = new Group({ name : "test" }),
                 ast, aRoot;
             
-            g.modules.push(new Module({
-                file : "./test/specimens/simple/a.js",
-                type : "js"
+            g.modules.push(new YUIModule({
+                file : "./test/specimens/simple/a.js"
             }));
             
             ast = g.ast;
@@ -122,9 +121,8 @@ describe("yui-configger", function() {
                 }
             });
             
-            g.modules.push(new Module({
-                file : "./test/specimens/simple/a.js",
-                type : "js"
+            g.modules.push(new YUIModule({
+                file : "./test/specimens/simple/a.js"
             }));
             
             ast = g.ast;
@@ -159,9 +157,8 @@ describe("yui-configger", function() {
                 existing : require("./specimens/simple/_existing-ast.json")
             });
             
-            g.modules.push(new Module({
-                file : "./test/specimens/simple/a.js",
-                type : "js",
+            g.modules.push(new YUIModule({
+                file : "./test/specimens/simple/a.js"
             }));
             
             assert.equal(
@@ -179,9 +176,8 @@ describe("yui-configger", function() {
                 existing : require("./specimens/simple/_existing-ast-literal.json"),
             });
             
-            g.modules.push(new Module({
-                file : "./test/specimens/simple/a.js",
-                type : "js",
+            g.modules.push(new YUIModule({
+                file : "./test/specimens/simple/a.js"
             }));
             
             assert.equal(
@@ -236,9 +232,8 @@ describe("yui-configger", function() {
                 }
             });
             
-            g.modules.push(new Module({
-                file : "./test/specimens/simple/a.js",
-                type : "js",
+            g.modules.push(new YUIModule({
+                file : "./test/specimens/simple/a.js"
             }));
             
             ast = g.ast;
