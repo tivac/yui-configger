@@ -1,4 +1,7 @@
-{
+/*jshint node:true */
+"use strict";
+
+module.exports = {
     "cssextensions" : {
         "desc"    : "CSS file extensions (comma-separated)",
         "default" : "css",
@@ -6,15 +9,20 @@
     },
 
     "css" : {
-        "alias"   : "f",
         "desc"    : "Generate config values for CSS modules",
         "default" : false,
         "type"    : "boolean"
     },
 
     "filter" : {
-        "alias"   : "f",
-        "desc"    : "File-name filter (glob)"
+        "alias" : "f",
+        "desc"  : "File-name filter (glob)"
+    },
+
+    "js" : {
+        "desc"    : "Generate config values for non-YUI JS modules",
+        "default" : false,
+        "type"    : "boolean"
     },
 
     "jsextensions" : {
@@ -24,9 +32,9 @@
     },
     
     "output" : {
-        "alias"   : "o",
-        "desc"    : "Output file for generated config (defaults to stdout)",
-        "type"    : "string"
+        "alias" : "o",
+        "desc"  : "Output file for generated config (defaults to stdout)",
+        "type"  : "string"
     },
     
     "prefix" : {
@@ -65,4 +73,4 @@
         "default" : "info",
         "type"    : "string"
     }
-}
+};
