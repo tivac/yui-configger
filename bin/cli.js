@@ -9,7 +9,7 @@ var fs      = require("fs"),
     details = require("../package.json"),
     argv    = require("optimist")
                 .usage(details.usage)
-                .options(require("../args.json"))
+                .options(require("../args.js"))
                 .argv,
 
     Configger = require("../lib/configger"),
