@@ -127,16 +127,18 @@ describe("yui-configger", function() {
             assert(modules[0].file.indexOf(path.join("js/a.js")) > -1);
         });
 
-        it("should exclude the output file from the list of modules", function() {
+        it("should exclude the output & template file from the list of modules", function() {
                 var c = new Configger({
                     root   : "./test/specimens/group-template/",
-                    output : "a.js"
+                    output : "a.js",
+                    js     : true
                 }),
                 modules = c._modules();
             
             assert(modules.length);
             modules.forEach(function(module) {
                 assert(module.file.indexOf(path.join("js/a.js")) === -1);
+                assert(module.file.indexOf("_config-template.js") === -1);
             });
         });
         
@@ -274,7 +276,7 @@ describe("yui-configger", function() {
 
             assert.equal(
                 c.run(),
-                _file("./test/specimens/bare-js/_config.config")
+                _file("./test/specimens/bare-js/_config.js")
             );
         });
     });

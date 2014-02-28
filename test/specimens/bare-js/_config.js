@@ -3,6 +3,7 @@ var test_config = {
             "/": {
                 base: "/",
                 modules: {
+                    "_config": { path: "_config.js" },
                     "module-a": {
                         path: "a.js",
                         requires: ["module-b"]
