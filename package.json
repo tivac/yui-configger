@@ -16,21 +16,21 @@
   },
   "dependencies": {
     "escape-regexp-component": "1.0.x",
-    "escodegen": "~1.2.0",
-    "esprima": "1.0.x",
-    "esquery": "~0.3.0",
-    "estraverse": "~1.5.0",
+    "escodegen": "~1.7.0",
+    "esprima": "2.6.0",
+    "esquery": "~0.4.0",
+    "estraverse": "~4.1.0",
     "globule": "~0.2.0",
-    "lodash": "~2.4.1",
-    "npmlog": "0.0.x",
+    "lodash": "~3.10.1",
+    "npmlog": "1.2.1",
     "optimist": "0.6.x"
   },
   "devDependencies": {
-    "istanbul": "~0.2.3",
-    "jscs": "~1.2.4",
-    "jshint": "~2.4.3",
-    "mocha": "~1.17.0",
-    "nixt": "~0.3.0"
+    "istanbul": "~0.3.22",
+    "jscs": "~2.3.0",
+    "jshint": "~2.8.0",
+    "mocha": "~2.3.3",
+    "nixt": "~0.4.1"
   },
   "scripts": {
     "test": "npm run-script jshint && npm run-script istanbul",
