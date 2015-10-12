@@ -165,8 +165,8 @@ describe("yui-configger", function() {
             }));
             
             assert.equal(
-                JSON.stringify(g.ast, null, 4),
-                JSON.stringify(require("./specimens/simple/_existing-ast-result.json"), null, 4)
+                JSON.stringify(require("./specimens/simple/_existing-ast-result.json"), null, 4),
+                JSON.stringify(g.ast, null, 4)
             );
         });
 
@@ -185,8 +185,8 @@ describe("yui-configger", function() {
             }));
             
             assert.equal(
-                JSON.stringify(g.ast, null, 4),
-                JSON.stringify(require("./specimens/simple/_existing-ast-literal-result.json"), null, 4)
+                JSON.stringify(require("./specimens/simple/_existing-ast-literal-result.json"), null, 4),
+                JSON.stringify(g.ast, null, 4)
             );
         });
 
