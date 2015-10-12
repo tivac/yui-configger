@@ -53,16 +53,20 @@
                                             "type": "Identifier",
                                             "name": "requires"
                                         },
+                                        "computed": false,
                                         "value": {
                                             "type": "ArrayExpression",
                                             "elements": [
                                                 {
                                                     "type": "Literal",
-                                                    "value": "module-b"
+                                                    "value": "module-b",
+                                                    "raw": "\"module-b\""
                                                 }
                                             ]
                                         },
-                                        "kind": "init"
+                                        "kind": "init",
+                                        "method": false,
+                                        "shorthand": false
                                     }
                                 ]
                             },
