@@ -17,7 +17,7 @@
   "dependencies": {
     "escape-regexp-component": "1.0.x",
     "escodegen": "~1.7.0",
-    "esprima": "2.6.0",
+    "esprima": "2.7.0",
     "esquery": "~0.4.0",
     "estraverse": "~4.1.0",
     "globule": "~0.2.0",
