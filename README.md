@@ -1,9 +1,11 @@
-yui-configger
+yui-configger 
 =============
 [![Build Status](https://travis-ci.org/tivac/yui-configger.png?branch=master)](https://travis-ci.org/tivac/yui-configger)
 [![NPM version](https://badge.fury.io/js/yui-configger.png)](http://badge.fury.io/js/yui-configger)
 [![Dependency Status](https://david-dm.org/tivac/yui-configger.png?theme=shields.io)](https://david-dm.org/tivac/yui-configger)
 [![devDependency Status](https://david-dm.org/tivac/yui-configger/dev-status.png?theme=shields.io)](https://david-dm.org/tivac/yui-configger#info=devDependencies)
+
+## :warning: :zap: :warning: This project is UNMAINTAINED :warning: :zap: :warning:
 
 Extract meta-data from a folder of YUI modules/CSS files & generate a Loader config object. Writing out a config file by hand sucks, so let's automate the process!
 
